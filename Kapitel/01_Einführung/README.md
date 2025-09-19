@@ -4,6 +4,7 @@ theme: fhooe
 header: Datenanalyse - Kapitel 1: Einführung
 footer: Dr. Georg Hackenberg, Professor für Informatik und Industriesysteme
 paginate: true
+math: mathjax
 ---
 
 ![bg right](./Titelbild.png)
