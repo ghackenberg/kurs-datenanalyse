@@ -282,7 +282,7 @@ Strukturen bestehend aus Knoten (die Elemente) und Kanten (die Beziehungen zwisc
 
 ---
 
-### Formalismus
+### Formalisierung
 
 Im Folgenden benötigen wir einen Formalismus, um Graphen und ihre Eigenschaften beschreiben zu können. Unser Formalismus umfasst die folgenden Elemente:
 
@@ -298,7 +298,7 @@ Im Folgenden benötigen wir einen Formalismus, um Graphen und ihre Eigenschaften
 
 ![bg contain right:50%](./Diagramme/Adjazenzmatrix.svg)
 
-### Adjazenzmatrix
+### Exkurs: Adjazenzmatrix
 
 Die Kantenmenge $E \subseteq V \times V$ kann als sogenannte Adjazenzmatrix $A$ mit Einträgen $A_{i,j}$ dargestellt werden:
 
@@ -494,6 +494,30 @@ public boolean hasPath(Node<T> source, Node<T> target) {
 
 ---
 
+<div class="columns">
+<div class="two">
+
+### Problem bei **zyklischen Graphen**
+
+Im rechten Beispiel würde der Aufruf der naiven Implementierung von `hasPath(A, D)` zu folgender Endlosrekursion führen:
+
+- **`hasPath(A, D)`** führt zu:
+    - `hasPath(B, D)` führt zu:
+      - **`hasPath(A, D)`** führt zu:
+        - `hasPath(B, D)` führt zu:
+          - ...
+      - *`hasPath(C, D)` wird nie erreicht!*
+
+</div>
+<div>
+
+![](./Diagramme/Graph_Zyklisch.svg)
+
+</div>
+</div>
+
+---
+
 ### Implementierung der Methode `hasPath(...)` für **zyklische Graphen**
 
 ```csharp
@@ -520,6 +544,28 @@ public boolean hasPath(Node<T> source, Node<T> target, List<Node<T>> visited = n
     return false
 }
 ```
+
+---
+
+<div class="columns">
+<div class="two">
+
+### Illustration der Lösung
+
+Hier wieder der Rekursionsbaum für den Aufruf der Methode `hasPath(A, B)`:
+
+- `hasPath(A, D, [])` führt zu:
+  - `hasPath(B, D, [A])` führt zu:
+    - *`hasPath(A, D, [A, B])` wird **nicht** ausgeführt, da Knoten `A` bereits besucht!*
+    - `hasPath(C, D, [A, B])` wird hingegen als nächstes ausgeführt und liefert den Wert `true`, da eine direkte Verbindung zwischen Knoten `C` und `D` besteht
+
+</div>
+<div>
+
+![](./Diagramme/Graph_Zyklisch.svg)
+
+</div>
+</div>
 
 ---
 
