@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: fhooe
-header: Datenanalyse - Kapitel 1: Datenstrukturen
+header: Datenanalyse - Kapitel 1: Datenstrukturen und Algorithmen
 footer: Dr. Georg Hackenberg, Professor für Informatik und Industriesysteme
 paginate: true
 math: mathjax
@@ -9,7 +9,7 @@ math: mathjax
 
 ![bg right](./Titelbild.png)
 
-# Kapitel 1: Datenstrukturen
+# Kapitel 1: Daten-strukturen und Algorithmen
 Dieses erste Kapitel umfasst die folgenden drei Abschnitte:
 
 1. Listen

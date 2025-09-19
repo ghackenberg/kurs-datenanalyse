@@ -135,12 +135,9 @@ Die Teilnehmer*innen sollten nach erfolgreichem absolvieren dieses Kurses die fo
 
 Dieser Kurs umfasst daraus abgeleitet die folgenden Kapitel:
 
-1. [Datenstrukturen](../01_Datenstrukturen/)
-1. [Algorithmen](../02_Algorithmen/)
-1. [Datenbanken](../03_Datenbanken/)
-1. [Structured Query Language](../04_SQL/)
-1. [Online Analytical Processing](../05_OLAP/)
-1. [Extract-Transform-Load](../06_ETL/)
+1. [Datenstrukturen und Algorithmen](../01_Datenstrukturen_und_Algorithmen/)
+1. [Transaktionsysteme und Anfragesprachen](../02_Transaktionsysteme_und_Anfragesprachen/)
+1. [Analysesysteme und Auswertungstechniken](../03_Analysesysteme_und_Auswertungstechniken/)
 
 ---
 
@@ -152,7 +149,7 @@ Für die Benotung in diesem Kurs gelten die folgenden Modalitäten:
 
 - Schriftliche Prüfung
 - Nach letztem Vorlesungstermin
-- 45 Minuten Dauer
+- 30 Minuten Dauer
 - Keine Hilfsmittel zugelassen
 
 ---

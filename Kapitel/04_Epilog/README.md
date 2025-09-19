@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: fhooe
-header: Datenanalyse - Kapitel 3: Datenbanken
+header: Datenanalyse - Epilog
 footer: Dr. Georg Hackenberg, Professor für Informatik und Industriesysteme
 paginate: true
 math: mathjax
@@ -9,8 +9,9 @@ math: mathjax
 
 ![bg right](./Titelbild.png)
 
-# Kap. 3: Datenbanken
+# Epilog
 
-Dieses dritte Kapitel umfasst die folgenden Abschnitte:
+Dieser letzte Foliensatz umfasst die folgenden Abschnitte:
 
-1. TODO
+1. Zusammenfassung
+1. Ausblick
