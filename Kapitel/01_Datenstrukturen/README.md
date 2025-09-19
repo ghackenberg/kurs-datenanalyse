@@ -573,4 +573,253 @@ Hier wieder der Rekursionsbaum für den Aufruf der Methode `hasPath(A, B)`:
 
 ## Bäume
 
-TODO
+Hierarchische Strukturen bestehend aus Knoten, die in einer Eltern-/Kindbeziehung stehen:
+
+- Organisationstrukturen in einem Unternehmen
+- Dateisystemstrukturen auf einer Festplatte
+- Klassische Seitenstrukturen im World-Wide-Web
+
+---
+
+![bg contain right:40%](./Baumknoten.png)
+
+### Knotenarten
+
+Bei Bäumen kann man grundsätzlich zwischen den folgenden drei Arten von Knoten unterscheiden:
+
+- Jeder Baum hat genau einen **Wurzelknoten (blau)**, der keinen Elternknoten besitzt
+- **Innere Knoten (grün)** haben sowohl Eltern- als auch Kindknoten
+- **Blattknoten (orange)** haben einen Eltern-, aber keinen Kindknoten
+
+---
+
+<div class="columns">
+<div class="two">
+
+### Knotenebenen
+
+Des Weiteren ist jeder Knoten auf einer definierten Ebene, die als die Länge des Pfades zwischen dem Knoten und dem Wurzelknoten definiert ist:
+
+- Der Wurzelknoten ist somit selbst per Definition auf der Ebene 0
+- Für jeden anderen Knoten ergibt sich die Ebene aus der Ebene des Elternknoten plus 1
+- Somit kann die Ebene vom Wurzelknoten ausgehend nach unten rekursiv berechnet werden
+
+</div>
+<div>
+
+![](./Diagramme/Baum_Knotenebenen.svg)
+
+</div>
+</div>
+
+---
+
+![bg right:40%](./Baumeigenschaften.png)
+
+### Baumbreite und -tiefe
+
+Des Weiteren können für Bäume zwei wichtige Eigenschaften definiert werden, die Baumbreite und die Baumtiefe:
+
+- Die Baumbreite ist definiert als die Länge des längsten Pfades vom Wurzelknoten zu einem der Blattknoten
+- Die Baumbreite ist definiert als die größte Anzahl an Knoten auf einer beliebigen Knotenebene
+
+---
+
+### Formalisierung
+
+Wir versuchen wieder eine Formalisierung der Datenstruktur als Grundlage für die weitere Betrachtung:
+
+- Menge der Knoten $V$
+- Elternabbildung $E: V \rightarrow V \cup \{\bot\}$
+  - $E(u) = v$ besagt, dass $v$ der Elternknoten von $u$ ist
+  - $E(v) = \bot$ besagt, dass $v$ der Wurzelknoten ist
+  - Es gibt einen Wurzelknoten: es existiert $v \in V$ mit $E(v) = \bot$
+  - Es gibt genau einen Wurzelknoten: $E(u) = \bot$ und $E(v) = \bot$ impliziert $u = v$
+- Baum $B = (V, E)$
+
+---
+
+![bg contain right:30%](./Baumhülle.png)
+
+### Transitive Hülle
+
+Momentan lässt die Elternabbildung noch einge Fälle zu, die nicht erwünscht sind (z.B. Zyklen). Um dies zu verhindern benötigen wir wieder die transitive Hülle $t(E) \subseteq V \times V$ mit $(u, v) \in t(E)$ genau dann wenn:
+
+- **Fall 1 (direkte Verbindung)** - Knoten $v$ ist Elternknoten von Knoten $u$, das heißt es gilt also $E(u) = v$
+- **Fall 2 (indirekte Verbindung)** - Knoten $v$ ist Vorfahre von $u$, es existiert also ein Zwischenknoten $w$ mit $(u, w) \in t(E)$ und $(w, v) \in t(E)$
+
+---
+
+### Azyklische Elternbeziehung
+
+Nun wollen wir mithilfe der transitiven Hülle $t(E)$ über der Elternbeziehung $E$ sicherstellen, dass die Elternbeziehung frei von Zyklen ist. Dies erreichen wir dadurch, dass wir folgende Eigenschaft fordern:
+
+- Ein Knoten darf sich über die Elternbeziehung nicht selbst erreichen können
+- Wir formalisieren diese Eigenschaft als $(u, v) \in t(E) \Rightarrow u \neq v$
+- Somit kann ein Tupel $(v, v)$ nicht in der transitiven Hülle $t(E)$ enthalten sein
+- Dies wiederum verhindert, das ein Pfad von einem beliebigen Knoten $v \in V$ über die Elternbeziehungen $E$ sich sich selbst führt
+- Somit haben wir eine azyklische Datenstruktur mit genau einem Wurzelknoten
+
+---
+
+<div class="columns">
+<div class="two">
+
+### Programmierschnittstelle
+
+Und so könnte die die API in C# aussehen:
+
+```csharp
+class Tree<T> {
+
+    public T value;
+
+    public Tree<T> parent;
+
+    public List<Tree<T>> children
+
+    public Tree<T> append(T value);
+
+    public int level() { ... }
+    public int depth() { ... }
+    public int width() { ... }
+}
+```
+
+</div>
+<div>
+
+![](./Diagramme/Baum.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+### Anwendungsbeispiel
+
+Das könnte eine mögliche Anwendung sein:
+
+```csharp
+// Ebene 0
+Tree<string> root = new Tree<string>()
+
+// Ebene 1
+Tree<string> a = root.append("A");
+Tree<string> b = root.append("B");
+
+// Ebene 2
+Tree<string> c = a.append("C")
+Tree<string> d = a.append("D")
+
+// Ebene 3
+Tree<string> e = c.append("E")
+
+// Ebene eines Knotens berechnen und auf der Konsole ausgeben
+Console.WriteLine(e.level())
+```
+
+</div>
+<div>
+
+![](./Diagramme/Baum_Beispiel.svg)
+
+</div>
+</div>
+
+---
+
+### Implementierung der Methode `level(...)`
+
+Die Ebene eines Knotens kann durch eine einfache rekursive Methode berechnet und muss daher nicht gespeichert werden:
+
+```csharp
+public int level() {
+
+    // Prüfe, ob es sich um den Wurzelknoten handlet
+    if (parent == null) {
+        // Falls ja, sind wir auf der 0-ten Ebene
+        return 0;
+    }
+
+    // Falls nein, ergibt sich die Ebene aus der Ebene des Elternknotens plus 1
+    return parent.level() + 1;
+
+}
+```
+
+---
+
+<div class="columns">
+<div class="two">
+
+### Illustration der Lösung
+
+Im Folgenden sehen wir, wie der Aufruf der Methode `level()` auf dem Knoten `e` abgearbeitet wird:
+
+- `e.level() = c.level() + 1`
+  - `c.level() = a.level() + 1`
+    - `a.level() = root.level() + 1`
+      - `root.level() = 0`
+    - `= 1`
+  - `= 2`
+- `= 3`
+
+</div>
+<div>
+
+![](./Diagramme/Baum_Beispiel.svg)
+
+</div>
+</div>
+
+---
+
+### Implementierung der Methode `depth(...)`
+
+Die Tiefe eines Baums kann ebenfalls über eine einfache rekursive Methode ausgerechnet und muss nicht gespeichert werden:
+
+```csharp
+public void depth() {
+    // Initialisieren des Ergebnisses mit dem Wert 0
+    int result = 0;
+
+    // Durchlaufen aller Kindknoten des aktuellen Knotens
+    foreach (Tree<T> child in children) {
+        // Überschreiben des Ergebnisses, wenn erforderlich
+        result = Math.Max(result, child.depth() + 1)
+    }
+
+    // Rückgabe des berechneten Ergebnisses
+    return result;
+}
+```
+
+---
+
+<div class="columns">
+<div class="two">
+
+### Illustration der Lösung
+
+Im Folgenden sehen wir, wie der Aufruf der Methode `depth()` auf dem Knoten `root` abgearbeitet wird:
+
+- `root.depth()` führt zu:
+  - `a.depth()` führt zu:
+    - `c.depth()` führt zu:
+      - `d.depth() = 0`
+    - `=> c.depth() = d.depth() + 1`
+  - `=> a.depth() = c.depth() + 1`
+  - `b.depth() = 0`
+- `=> root.depth() = a.depth() + 1`
+
+</div>
+<div>
+
+![](./Diagramme/Baum_Beispiel.svg)
+
+</div>
+</div>

@@ -1,0 +1,16 @@
+classDiagram
+
+    class Tree~T~ {
+        value: T
+
+        parent: Tree~T~
+
+        children: List~Tree~T~~
+
+        append(value: T) Tree~T~
+        level(): int
+        depth(): int
+        width(): int
+    }
+
+    Tree --> Tree: parent

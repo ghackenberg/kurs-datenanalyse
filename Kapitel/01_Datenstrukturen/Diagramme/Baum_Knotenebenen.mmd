@@ -1,0 +1,46 @@
+flowchart
+
+    subgraph "Level 0"
+        A
+    end
+
+    subgraph "Level 1"
+        B
+        C
+        D
+    end
+
+    subgraph "Level 2"
+        E
+        F
+        G
+    end
+
+    subgraph "Level 3"
+        H
+        I
+    end
+
+    A --> B
+    A --> C
+    A --> D
+
+    B --> E
+    B --> F
+
+    C --> G
+
+    E --> H
+    F --> I
+
+    style A fill:lightblue,stroke:blue
+
+    style B fill:lightgreen,stroke:green
+    style C fill:lightgreen,stroke:green
+    style E fill:lightgreen,stroke:green
+    style F fill:lightgreen,stroke:green
+
+    style D fill:orange,stroke:red
+    style G fill:orange,stroke:red
+    style H fill:orange,stroke:red
+    style I fill:orange,stroke:red
