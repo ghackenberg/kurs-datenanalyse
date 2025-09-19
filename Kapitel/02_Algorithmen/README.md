@@ -10,7 +10,6 @@ math: mathjax
 ![bg right](./Titelbild.png)
 
 # Kapitel 2: Algorithmen
-
-Dieses zweite Kapitel umfasst die folgenden Abschnitte:
+Dieses zweite Kapitel umfasst die folgenden drei Abschnitte:
 
 1. TODO

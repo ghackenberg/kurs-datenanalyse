@@ -44,7 +44,7 @@ Formalisierung der grundlegenden Prinzipien der mathematischen Beweisführung:
 
 ---
 
-![bg right](./Mengenlehre.png)
+![bg contain right:35%](./Mengenlehre.png)
 
 ### Mengenlehre
 
@@ -53,6 +53,7 @@ Untersuchung von Mengen, also Sammlungen von Objekten, und den Operationen auf d
 - Mengen $\emptyset$ und $\mathcal{P}(\cdot)$
 - Elementoperatoren $\in$ und $\forall$ sowie $\exists$ und $\nexists$
 - Mengenoperatoren $\cup$ und $\cap$ sowie $\setminus$ und $\times$
+- Mengenbeziehungen $\subset$ und $\subseteq$
 - Tupel $(a, b) \in A \times B$
 
 ---
@@ -98,9 +99,9 @@ Anordnung, Verknüpfung und Funktionsweise der Komponenten eines digitalen Rechn
 
 Klassifizierung der unterschiedlichen Rechnerarchitekturen nach Michael J. Flynn (1966):
 
-- Single Instruction, Single Data (SISD; klassische Einkernrechner)
-- Single Instruction, Multiple Data (SIMD; Vektorrechner)
-- Multiple Instruction, Single / Multiple Data (Großrechner)
+- **Single Instruction, Single Data** (SISD; klassische Einkernrechner)
+- **Single Instruction, Multiple Data** (SIMD; Vektorrechner)
+- **Multiple Instruction, Single / Multiple Data** (Großrechner)
 
 ---
 
@@ -108,9 +109,9 @@ Klassifizierung der unterschiedlichen Rechnerarchitekturen nach Michael J. Flynn
 
 ### Programmierparadigmen
 
-- Strukturierte Programmierung (Verzweigungen und Schleifen)
-- Funktionale Programmierung (Funktionen, Übergabewerte, Rückgabewerte)
-- Objektorientierte Programmierung (Schnittstellen, Klassen, Vererbung, Instanziierung, Polymorphismus)
+- **Strukturierte Programmierung** (Verzweigungen und Schleifen)
+- **Funktionale Programmierung** (Funktionen, Übergabewerte, Rückgabewerte)
+- **Objektorientierte Program-mierung** (Schnittstellen, Klassen, Vererbung, Instanziierung, Polymorphismus)
 
 ---
 

@@ -1,0 +1,22 @@
+classDiagram
+
+    class Graph~T~ {
+        nodes: List~Node~T~~
+
+        addNode(value: T) Node~T~
+        removeNode(node: Node~T~) void
+
+        hasEdge(source: Node~T~, target: Node~T~) boolean
+        addEdge(source: Node~T~, target: Node~T~) void
+        removeEdge(source: Node~T~, target: Node~T~) void
+
+        hasPath(source: Node~T~, target: Node~T~) boolean
+    }
+
+    class Node~T~ {
+        value: T
+        neighbors: List~Node~T~~
+    }
+
+    Graph --> Node: nodes
+    Node --> Node: neighbors
