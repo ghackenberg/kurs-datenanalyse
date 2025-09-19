@@ -1,0 +1,10 @@
+/* @theme fhooe */
+
+@import 'default';
+
+section {
+    background-image: url(../../Theme/fhooe.svg);
+    background-repeat: no-repeat;
+    background-size: 3rem;
+    background-position: top 1rem right 1rem;
+}
