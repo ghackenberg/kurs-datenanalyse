@@ -1,4 +1,12 @@
 {
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": ".mmd",
+                "cmd": "mmdc -i \"${file}\" -o \"${fileDirname}/${fileBasenameNoExt}.svg\""
+            }
+        ]
+    },
     "markdown.marp.themes": [
         "./Theme/fhooe.css"
     ]

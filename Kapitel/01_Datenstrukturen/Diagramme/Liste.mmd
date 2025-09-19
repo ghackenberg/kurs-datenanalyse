@@ -1,0 +1,22 @@
+classDiagram
+
+    direction TB
+
+    class List~T~ {
+        head: Element~T~
+        
+        length() int
+        get(index: int) T
+        remove(index: int) T
+        append(element: T) void
+        prepend(element: T) void
+        replace(index: int, element: T)
+    }
+
+    class Element~T~ {
+        value: T
+
+        next: Element~T~
+    }
+
+    List --> Element: head

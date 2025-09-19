@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: fhooe
-header: Datenanalyse - Kapitel 1: Einführung
+header: Datenanalyse - Prolog
 footer: Dr. Georg Hackenberg, Professor für Informatik und Industriesysteme
 paginate: true
 math: mathjax
@@ -9,9 +9,9 @@ math: mathjax
 
 ![bg right](./Titelbild.png)
 
-# Kapitel 1: Einführung
+# Prolog
 
-Dieses erste Kapitel umfasst die folgenden fünf Abschnitte:
+Dieser erste Foliensatz umfasst die folgenden fünf Abschnitte:
 
 1. Voraussetzungen
 1. Lernziele
@@ -26,13 +26,13 @@ Dieses erste Kapitel umfasst die folgenden fünf Abschnitte:
 Für diesen Kurs in Datenanalyse sollten Sie ausreichende Kenntnisse in den folgenden Themenbereichen mitbringen:
 
 - **Mathematik** (Logik, Mengenlehre, Algebra, Analysis, Geometrie, Numerik, Stochastik)
-- **Informatik** (Computerarchitektur, Binärsysteme, Befehlsätze, Programmiersprachen, Entwicklungsmethoden)
+- **Informatik** (Zahlensysteme, Zeichenkodierungen, Rechnerarchitekturen, Programmierparadigmen, Entwicklungsmethoden)
 
 ---
 
 ![bg right](./Logik.png)
 
-### Mathematische Logik
+### Logik
 
 Formalisierung der grundlegenden Prinzipien der mathematischen Beweisführung:
 
@@ -57,6 +57,63 @@ Untersuchung von Mengen, also Sammlungen von Objekten, und den Operationen auf d
 
 ---
 
+![bg right](./Zahlensysteme.png)
+
+### Zahlensysteme
+
+Darstellung von Zahlen abhängig zu einer definierten Basis (z.B. 2 und 10 sowie 16):
+
+- Binärzahlen (z.B. $0$ und $1$ sowie $1010$ und $1011$)
+- Dezimalzahlen (z.B. $0$ und $1$ sowie $10$ und $11$)
+- Hexadezimalzahlen (z.B. $0$ und $1$ sowie $A$ und $B$)
+
+---
+
+![bg right](./Zeichenkodierungen.png)
+
+### Zeichenkodierungen
+
+Darstellung von Zeichen und anderer Symbole aus der Schriftsprache verschiedener Kulturen:
+
+- American Standard Code for Information Interchange (ASCII)
+- American National Standards Institute Code (ANSI-Code)
+- Universal Coded Character Set Transformation Format (UTF)
+
+---
+
+![bg right](./Rechnerarchitektur.png)
+
+### Rechnerarchitekturen
+
+Anordnung, Verknüpfung und Funktionsweise der Komponenten eines digitalen Rechners:
+
+- **Von-Neumann-Architektur** (CPU, Bussystem, Speicherwerk, Ein-/Ausgabewerk)
+- **Harvard-Architektur** (strikte Trennung von Daten- und Befehlsspeicher)
+
+---
+
+![bg right](./Flynn.png)
+
+### Rechnerarchitekturen (cont'd)
+
+Klassifizierung der unterschiedlichen Rechnerarchitekturen nach Michael J. Flynn (1966):
+
+- Single Instruction, Single Data (SISD; klassische Einkernrechner)
+- Single Instruction, Multiple Data (SIMD; Vektorrechner)
+- Multiple Instruction, Single / Multiple Data (Großrechner)
+
+---
+
+![bg right](./Programmierparadigmen.png)
+
+### Programmierparadigmen
+
+- Strukturierte Programmierung (Verzweigungen und Schleifen)
+- Funktionale Programmierung (Funktionen, Übergabewerte, Rückgabewerte)
+- Objektorientierte Programmierung (Schnittstellen, Klassen, Vererbung, Instanziierung, Polymorphismus)
+
+---
+
 ## Lernziele
 
 Die Teilnehmer*innen sollten nach erfolgreichem absolvieren dieses Kurses die folgenden Fähigkeiten entwickelt haben:
@@ -77,13 +134,12 @@ Die Teilnehmer*innen sollten nach erfolgreichem absolvieren dieses Kurses die fo
 
 Dieser Kurs umfasst daraus abgeleitet die folgenden Kapitel:
 
-1. [**Einführung**](../01_Einführung/)
-1. [Datenbanken](../02_Datenbanken/)
-1. [Structured Query Language](../03_SQL/)
-1. [Online Analytical Processing](../04_OLAP/)
-1. [Extract-Transform-Load](../05_ETL/)
-1. [Standardalgorithmen](../06_Standardalgorithmen/)
-1. [Ausblick](../07_Ausblick/)
+1. [Datenstrukturen](../01_Datenstrukturen/)
+1. [Algorithmen](../02_Algorithmen/)
+1. [Datenbanken](../03_Datenbanken/)
+1. [Structured Query Language](../04_SQL/)
+1. [Online Analytical Processing](../05_OLAP/)
+1. [Extract-Transform-Load](../06_ETL/)
 
 ---
 

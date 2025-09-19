@@ -27,3 +27,33 @@ section::before {
     background-size: 66%;
     background-position: center;
 }
+
+section div.columns {
+    display: flex;
+
+    flex-direction: row;
+
+    align-items: center;
+
+    gap: 2rem;
+}
+
+section div.columns > div {
+    flex-basis: 1rem;
+    flex-grow: 1;
+}
+section div.columns > div.two {
+    flex-grow: 2;
+}
+section div.columns > div.three {
+    flex-grow: 3;
+}
+section div.columns > div.four {
+    flex-grow: 4;
+}
+section div.columns > div.five {
+    flex-grow: 5;
+}
+section div.columns > div.six {
+    flex-grow: 6;
+}

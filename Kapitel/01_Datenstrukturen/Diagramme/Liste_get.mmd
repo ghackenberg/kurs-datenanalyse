@@ -1,0 +1,12 @@
+flowchart
+
+    Start((" ")) --> Iterator_initialisieren_und_Zähler_initialisieren["Iterator initialisieren<br/>und Zähler initialisieren"] --> Ende_erreicht{Ende erreicht?}
+
+    Ende_erreicht --nein--> Iterator_setzen_und_Zähler_inkrementieren["Iterator setzen und<br/>Zähler inkrementieren"] --> Ende_erreicht
+
+    Ende_erreicht --ja--> Zähler_zurückgeben["Zähler zurückgeben"] --> Ende((" "))
+
+    Iterator_setzen_und_Zähler_inkrementieren ~~~ Zähler_zurückgeben
+
+    style Start fill:black
+    style Ende fill:black
