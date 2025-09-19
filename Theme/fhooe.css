@@ -3,8 +3,27 @@
 @import 'default';
 
 section {
+    position: relative;
+}
+
+section::before {
+    content: "";
+
+    display: block;
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    z-index: 100;
+
+    width: 3rem;
+    height: 3rem;
+
+    background-color: #004B96;    
     background-image: url(../../Theme/fhooe.svg);
     background-repeat: no-repeat;
-    background-size: 3rem;
-    background-position: top 1rem right 1rem;
+    background-size: 66%;
+    background-position: center;
 }
