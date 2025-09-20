@@ -443,6 +443,9 @@ public Node<T> addNode(T value) {
 
 ---
 
+<div class="columns">
+<div class="two">
+
 ### Implementierung der Methode `hasEdge(...)`
 
 Bevor wir eine Verbindung zwischen zwei Knoten hinzufügen, sollten wir prüfen, ob die Kante bereits exisiert:
@@ -461,6 +464,14 @@ public void hasEdge(Node<T> source, Node<T> target) {
     return false;
 }
 ```
+
+</div>
+<div>
+
+![](./Diagramme/Graph_hasEdge.svg)
+
+</div>
+</div>
 
 ---
 
@@ -482,7 +493,12 @@ public void addEdge(Node<T> source, Node<T> target) {
 
 ---
 
+<div class="columns">
+<div class="two">
+
 ### Implementierung der Methode `hasPath(...)` für **azyklische Graphen**
+
+Für azyklische Graph könnte die Implementierung der Methode `hasPath(...)` als einfache rekursive Funktion erfolgen:
 
 ```csharp
 public boolean hasPath(Node<T> source, Node<T> target) {
@@ -499,10 +515,18 @@ public boolean hasPath(Node<T> source, Node<T> target) {
             return true
         }
     }
-    // Fall weder ein direkter noch ein indirekter Pfad gefunden wurde, gib falsch zurück
+    // Fall weder direkter noch indirekter Pfad gefunden wurde, gib falsch zurück
     return false
 }
 ```
+
+</div>
+<div>
+
+![](./Diagramme/Graph_hasPath_azyklisch.svg)
+
+</div>
+</div>
 
 ---
 

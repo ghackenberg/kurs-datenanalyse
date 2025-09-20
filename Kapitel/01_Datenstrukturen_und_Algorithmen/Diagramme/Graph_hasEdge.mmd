@@ -1,0 +1,18 @@
+flowchart
+
+    Start((" ")) --> A{Weitere Nachbarknoten?}
+
+    A --ja--> B{Nächster Nachbarknoten<br/>gleich Zielknoten?}
+    
+    B --ja--> C[<b>Wahr</b> zurückgeben]
+
+    B --nein--> A
+
+    A --nein--> D[<b>Falsch</b> zurückgeben]
+
+    C --> Stop1((" "))
+    D --> Stop2((" "))
+
+    style Start fill:black
+    style Stop1 fill:black
+    style Stop2 fill:black

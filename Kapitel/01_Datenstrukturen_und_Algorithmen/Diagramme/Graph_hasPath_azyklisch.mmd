@@ -1,0 +1,37 @@
+flowchart
+
+    Start((" "))
+    Stop1((" "))
+    Stop2((" "))
+    Stop3((" "))
+
+    A{Existiert Kante<br/>zum Zielknoten?}
+    B[<b>Wahr</b> zurückgeben]
+    C{Hat weitere<br/>Nachbarknoten?}
+    D{Existiert <b>Pfad</b> von<br/>Nachbarknoten zu<br/>Zielknoten?}
+    E[<b>Wahr</b> zurückgeben]
+    F[<b>Falsch</b> zurückgeben]
+
+    Start --> A
+    
+    A --ja--> B
+    A --nein--> C
+
+    B --> Stop1
+
+    C --ja--> D
+
+    D --ja--> E
+    D --nein--> C
+
+    E --> Stop2
+
+    C --nein--> F
+
+    F --> Stop3
+
+    style Start fill:black
+    style Stop1 fill:black
+    style Stop2 fill:black
+    style Stop3 fill:black
+
