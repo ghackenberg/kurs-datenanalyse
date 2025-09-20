@@ -119,13 +119,13 @@ Klassifizierung der unterschiedlichen Rechnerarchitekturen nach Michael J. Flynn
 
 Die Teilnehmer*innen sollten nach erfolgreichem absolvieren dieses Kurses die folgenden Fähigkeiten entwickelt haben:
 
+- geeignete Datenstrukturen für gegebene Anwendungsfälle konzipieren,
 - geeignete Datenbankstrukturen für gegebene Anwendungsfälle konzipieren,
-- geeignete OLAP-Würfel für gegebene Anwendungsfälle konzipieren,
+- geeignete Datenlagerstrukturen für gegebene Anwendungsfälle konzipieren,
 - geeignete ETL-Prozesse für gegebene Anwendungfälle konzipieren,
-- Daten mithilfe von SQL-Anfragen analysieren,
-- Daten mithilfe von OLAP-Operationen analysieren,
-- Daten mithilfe von Standardalgorithmen analysieren, und
-- Daten visualiseren
+- Datenstrukturen mithilfe von Algorithmen analysieren, und
+- Datenbankstrukturen mithilfe von SQL-Anfragen analysieren,
+- Datenlagerstrukturen mithilfe von OLAP-Operationen analysieren,
 
 ---
 
@@ -135,9 +135,9 @@ Die Teilnehmer*innen sollten nach erfolgreichem absolvieren dieses Kurses die fo
 
 Dieser Kurs umfasst daraus abgeleitet die folgenden Kapitel:
 
-1. [Datenstrukturen und Algorithmen](../01_Datenstrukturen_und_Algorithmen/)
-1. [Transaktionsysteme und Anfragesprachen](../02_Transaktionsysteme_und_Anfragesprachen/)
-1. [Analysesysteme und Auswertungstechniken](../03_Analysesysteme_und_Auswertungstechniken/)
+1. [**Datenstrukturen** und Algorithmen](../01_Datenstrukturen_und_Algorithmen/)
+1. [**Datenbanken** und Anfragesprachen](../02_Datenbanken_und_Anfragesprachen/)
+1. [**Datenlager** und Auswertungstechniken](../03_Datenlager_und_Analysetechniken/)
 
 ---
 

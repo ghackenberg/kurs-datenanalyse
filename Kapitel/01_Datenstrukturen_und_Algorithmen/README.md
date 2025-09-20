@@ -270,6 +270,18 @@ Console.WriteLine(list.get(1).length());
 
 ---
 
+### Aufgaben für das **Selbststudium**
+
+![bg right](./Selbststudium.png)
+
+Um Ihr Verständnis zu vertiefen, widmen Sie sich den folgenden Aufgaben im Selbststudium:
+
+- Implementierung der Methode `void append(T element)`
+- Implementierung der Methode `void prepend(T Element)`
+- Implementierung der Methode `void replace(int index, T element)`
+
+---
+
 ![bg right](./Graphen.png)
 
 ## Graphen
@@ -569,6 +581,17 @@ Hier wieder der Rekursionsbaum für den Aufruf der Methode `hasPath(A, B)`:
 
 ---
 
+### Aufgaben für das **Selbststudium**
+
+![bg right](./Selbststudium.png)
+
+Um Ihr Verständnis zu vertiefen, widmen Sie sich den folgenden Aufgaben im Selbststudium:
+
+- Implementierung der Methode `void removeNode(Node<T> node)`
+- Implementierung der Methode `void removeEdge(Node<T> source, Node<T> target)`
+
+---
+
 ![bg right](./Bäume.png)
 
 ## Bäume
@@ -682,7 +705,7 @@ class Tree<T> {
 
     public int level() { ... }
     public int depth() { ... }
-    public int width() { ... }
+    public int width(List<int> counts = new List<int>()) { ... }
 }
 ```
 
@@ -823,3 +846,14 @@ Im Folgenden sehen wir, wie der Aufruf der Methode `depth()` auf dem Knoten `roo
 
 </div>
 </div>
+
+---
+
+### Aufgaben für das **Selbststudium**
+
+![bg right](./Selbststudium.png)
+
+Um Ihr Verständnis zu vertiefen, widmen Sie sich den folgenden Aufgaben im Selbststudium:
+
+- Implementierung der Methode `void append(T element)`
+- Implementierung der Methode `void width(List<int> counts)`<br/>*Hinweis: Jeder Baumknoten muss sich in die Liste `counts` an der richtigen Stelle eintragen!*
