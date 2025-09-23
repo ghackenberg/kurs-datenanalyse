@@ -1,0 +1,31 @@
+erDiagram
+
+    Person {
+        string ID PK
+        string Typ "Lektor | Teilnehmer"
+        string Vorname
+        string Nachname
+        string Email UK
+    }
+
+    Lektor {
+        string ID PK
+        string Personalnummer UK
+    }
+
+    Teilnehmer {
+        string ID
+        string Matrikelnummer UK
+    }
+
+    Vorlesung {
+        string Name PK
+        int ECTS
+    }
+
+    Person ||--o| Lektor : "ist ein"
+    Person ||--o| Teilnehmer : "ist ein"
+
+    Lektor ||--o{ Vorlesung : liest
+
+    Teilnehmer }o--o{ Vorlesung : hört

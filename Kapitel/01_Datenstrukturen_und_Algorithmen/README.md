@@ -270,9 +270,9 @@ Console.WriteLine(list.get(1).length());
 
 ---
 
-### Aufgaben für das **Selbststudium**
+![bg right](../Selbststudium.png)
 
-![bg right](./Selbststudium.png)
+### Aufgaben für das **Selbststudium**
 
 Um Ihr Verständnis zu vertiefen, widmen Sie sich den folgenden Aufgaben im Selbststudium:
 
@@ -605,9 +605,9 @@ Hier wieder der Rekursionsbaum für den Aufruf der Methode `hasPath(A, B)`:
 
 ---
 
-### Aufgaben für das **Selbststudium**
+![bg right](../Selbststudium.png)
 
-![bg right](./Selbststudium.png)
+### Aufgaben für das **Selbststudium**
 
 Um Ihr Verständnis zu vertiefen, widmen Sie sich den folgenden Aufgaben im Selbststudium:
 
@@ -900,9 +900,9 @@ Im Folgenden sehen wir, wie der Aufruf der Methode `depth()` auf dem Knoten `roo
 
 ---
 
-### Aufgaben für das **Selbststudium**
+![bg right](../Selbststudium.png)
 
-![bg right](./Selbststudium.png)
+### Aufgaben für das **Selbststudium**
 
 Um Ihr Verständnis zu vertiefen, widmen Sie sich den folgenden Aufgaben im Selbststudium:
 

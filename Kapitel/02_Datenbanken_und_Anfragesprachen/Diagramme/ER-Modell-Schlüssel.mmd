@@ -1,0 +1,14 @@
+erDiagram
+
+    Studiengang {
+        string Name PK
+    }
+
+    Teilnehmer {
+        string Matrikelnummer PK
+        string Vorname
+        string Nachname
+        string E-Mail UK
+    }
+
+    Studiengang ||--o{ Teilnehmer : studiert

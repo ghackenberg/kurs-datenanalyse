@@ -1,0 +1,36 @@
+erDiagram
+
+    Lektor {
+        string Personalnummer
+        string Vorname
+        string Nachname
+    }
+
+    Studiengang {
+        string Name
+    }
+
+    Vorlesung {
+        string Name
+        int ECTS
+    }
+
+    Termin {
+        date Datum
+        time Start
+        time Ende
+    }
+
+    Teilnehmer {
+        string Matrikelnummer
+        string Vorname
+        string Nachname
+    }
+
+    Studiengang }o--o{ Vorlesung : umfasst
+    Studiengang ||--o{ Teilnehmer : studiert
+    
+    Lektor ||--o{ Vorlesung : liest
+
+    Vorlesung }o--o{ Teilnehmer : hört
+    Vorlesung ||--o{ Termin : hat
