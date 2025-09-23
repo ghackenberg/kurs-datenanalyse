@@ -319,7 +319,7 @@ Die Kantenmenge $E \subseteq V \times V$ kann als sogenannte Adjazenzmatrix $A$ 
 
 ---
 
-![bg contain right:40%](./Transitive_Hülle.png)
+![bg contain right:40%](./Diagramme/Graph_Hülle.svg)
 
 ### Transitive Hülle
 
@@ -373,7 +373,7 @@ class Graph<T> {
 
 class Node<T> {
     public T value;
-    public List<Node<T>> edges;
+    public List<Node<T>> neighbors;
 }
 ```
 
@@ -531,7 +531,7 @@ public boolean hasPath(Node<T> source, Node<T> target) {
 ---
 
 <div class="columns">
-<div class="two">
+<div class="six">
 
 ### Problem bei **zyklischen Graphen**
 
@@ -547,7 +547,7 @@ Im rechten Beispiel würde der Aufruf der naiven Implementierung von `hasPath(A,
 </div>
 <div>
 
-![](./Diagramme/Graph_Zyklisch.svg)
+![width:100](./Diagramme/Graph_Zyklisch.svg)
 
 </div>
 </div>
@@ -584,7 +584,7 @@ public boolean hasPath(Node<T> source, Node<T> target, List<Node<T>> visited = n
 ---
 
 <div class="columns">
-<div class="two">
+<div class="six">
 
 ### Illustration der Lösung
 
@@ -598,7 +598,7 @@ Hier wieder der Rekursionsbaum für den Aufruf der Methode `hasPath(A, B)`:
 </div>
 <div>
 
-![](./Diagramme/Graph_Zyklisch.svg)
+![width:100](./Diagramme/Graph_Zyklisch.svg)
 
 </div>
 </div>
@@ -628,7 +628,8 @@ Hierarchische Strukturen bestehend aus Knoten, die in einer Eltern-/Kindbeziehun
 
 ---
 
-![bg contain right:40%](./Baumknoten.png)
+<div class="columns">
+<div class="two">
 
 ### Knotenarten
 
@@ -637,6 +638,14 @@ Bei Bäumen kann man grundsätzlich zwischen den folgenden drei Arten von Knoten
 - Jeder Baum hat genau einen **Wurzelknoten (blau)**, der keinen Elternknoten besitzt
 - **Innere Knoten (grün)** haben sowohl Eltern- als auch Kindknoten
 - **Blattknoten (orange)** haben einen Eltern-, aber keinen Kindknoten
+
+</div>
+<div>
+
+![](./Diagramme/Baum_Knotenarten.svg)
+
+</div>
+</div>
 
 ---
 
@@ -661,14 +670,23 @@ Des Weiteren ist jeder Knoten auf einer definierten Ebene, die als die Länge de
 
 ---
 
-![bg right:40%](./Baumeigenschaften.png)
+<div class="columns">
+<div class="two">
 
 ### Baumbreite und -tiefe
 
 Des Weiteren können für Bäume zwei wichtige Eigenschaften definiert werden, die Baumbreite und die Baumtiefe:
 
-- Die Baumbreite ist definiert als die Länge des längsten Pfades vom Wurzelknoten zu einem der Blattknoten
-- Die Baumbreite ist definiert als die größte Anzahl an Knoten auf einer beliebigen Knotenebene
+- Die **Baumbreite** ist definiert als die Länge des längsten Pfades vom Wurzelknoten zu einem der Blattknoten (= 2 im Beispiel auf der rechten Seite)
+- Die **Baumbreite** ist definiert als die größte Anzahl an Knoten auf einer beliebigen Knotenebene (= 3 im Beispiel auf der rechten Seite)
+
+</div>
+<div>
+
+![](./Diagramme/Baum_Breite_Tiefe.svg)
+
+</div>
+</div>
 
 ---
 
@@ -686,7 +704,8 @@ Wir versuchen wieder eine Formalisierung der Datenstruktur als Grundlage für di
 
 ---
 
-![bg contain right:30%](./Baumhülle.png)
+<div class="columns">
+<div class="three">
 
 ### Transitive Hülle
 
@@ -694,6 +713,14 @@ Momentan lässt die Elternabbildung noch einge Fälle zu, die nicht erwünscht s
 
 - **Fall 1 (direkte Verbindung)** - Knoten $v$ ist Elternknoten von Knoten $u$, das heißt es gilt also $E(u) = v$
 - **Fall 2 (indirekte Verbindung)** - Knoten $v$ ist Vorfahre von $u$, es existiert also ein Zwischenknoten $w$ mit $(u, w) \in t(E)$ und $(w, v) \in t(E)$
+
+</div>
+<div>
+
+![](./Diagramme/Baum_Hülle.svg)
+
+</div>
+</div>
 
 ---
 

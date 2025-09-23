@@ -1,0 +1,30 @@
+flowchart
+
+    A -.t(E).-> D
+
+    A ==> B
+    B ==> D
+    D ==> F
+
+    A -.t(E).-> B
+    B -.t(E).-> D
+    D -.t(E).-> F
+    
+    B -.t(E).-> F
+    A -.t(E).-> F
+
+    A ==> C
+    C ==> E
+
+    C -.t(E).-> E
+
+    A -.t(E).-> C
+    A -.t(E).-> E
+
+    style A fill:lightblue,stroke:blue
+    style B fill:lightgreen,stroke:green
+    style C fill:lightgreen,stroke:green
+    style D fill:lightgreen,stroke:green
+    style E fill:orange,stroke:red
+    style F fill:orange,stroke:red
+
