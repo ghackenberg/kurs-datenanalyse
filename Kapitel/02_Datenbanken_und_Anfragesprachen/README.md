@@ -229,8 +229,107 @@ TODO
 
 ---
 
+### Relationale Algebra
+
+TODO
+
+---
+
+![bg right](./Relationale-Algebra.png)
+
+### Relationale Operationen
+
+Die relationale Algebra umfasst die folgenden Operationen:
+
+- Vereinigung, Schnittmenge, Differenz, Symmetrische Differenz, Kartesisches Produkt
+- Projektion und Selektion
+- Join, Equi-Join, Natural Join, Outer Join, Anti Join
+- Umbenennung und Division
+
+---
+
+### Vereingung
+
+TODO
+
+---
+
+### Schnittmenge
+
+TODO
+
+---
+
+### Differenz
+
+TODO
+
+---
+
+### Symmetrische Differenz
+
+TODO
+
+---
+
+### Kartesisches Produkt
+
+TODO
+
+---
+
+### Projektion
+
+TODO
+
+---
+
+### Selektion
+
+TODO
+
+---
+
+### Join
+
+TODO
+
+---
+
+### Umbenennung
+
+TODO
+
+---
+
+### Division
+
+TODO
+
+---
+
+![bg right](../Selbststudium.png)
+
+### Aufgaben für das **Selbststudium**
+
+So kannst du dein Verständnis noch weiter vertiefen:
+
+- TODO
+
+---
+
 ![bg right](./Structured-Query-Language.png)
 
 ## Structured Query Language
 
 TODO
+
+---
+
+![bg right](../Selbststudium.png)
+
+### Aufgaben für das **Selbststudium**
+
+So kannst du dein Verständnis noch weiter vertiefen:
+
+- TODO
