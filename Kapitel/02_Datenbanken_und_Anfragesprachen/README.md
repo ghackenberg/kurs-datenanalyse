@@ -225,11 +225,52 @@ So kannst du dein Verständnis noch weiter vertiefen:
 
 ## Relationale Datenbanksysteme
 
-TODO
+Speicherung von Daten in Form von Tabellen und Zugriff über lesende und schreibende Transaktionen:
+
+1. Theorie: Relationale Algebra (Codd 1970)
+1. Prototypische Implementierung: System R (IBM 1974)
+1. Kommerzialisierung: Oracle (Relational Software 1979)
 
 ---
 
-### Relationale Algebra
+### Relationale Algebra (Edgar Codd, 1970)
+
+Relationale Datenbanksysteme betrachten Datensätze als Tupel einer Relation, welche wiederum eine Teilmenge des kartesischen Produktes der Attributdomänen ist: 
+
+- Domänen $D_i$ mit $n \in \mathbb{N}$ und $i \in \mathbb{N}$ entsprechen den Datentypen der Attribute einer Entität (z.B. `boolean`, `int` oder `string`)
+- Relationen $R \subseteq D_1 \times ... \times D_n = \bigtimes_{i \leq n} D_i$ mit $n \in \mathbb{N}$ entsprechen den gesammelten Datensätzen (z.B. E-Mail-Kontakte)
+- Tupel $t = (t_1, ..., t_n) \in R$ mit $n \in \mathbb{N}$ entsprechen einzelnen Datensätzen, die in einer Relation enthalten sind (z.B. E-Mail-Kontakt `X`)
+- Variablen $t_i \in D_i$ entsprechen den Attributwerten der Tupel $(t_1, ..., t_n) \subseteq R$ mit $i \leq n$ und $i,n \in \mathbb{N}$ sowie Domänen $D_i$
+
+---
+
+![bg contain right:40%](./Diagramme/RDBMS-Idee.svg)
+
+### Analogie mit Excel
+
+Hier ist eine einfache Analogie für die Konzepte der relationalen Algebra:
+
+- **Relationen** entsprichen zweidimensionalen Tabellen wie z.B. aus Excel bekannt
+- **Domänen** entsprechen den Spalten der Tabelle und deren Datentypen
+- **Tupel** entsprechen den einzelnen Zeilen der Tabellenstruktur
+- **Variablen** entsprechen den Zellen der Tabellenstruktur
+
+---
+
+![bg contain right:40%](./Abbildung-ERM-RDBMS.png)
+
+### Ableitung aus Entity-Relationship-Modell
+
+Entity-Relationship-Modelle können einfach in Relationen überführt werden:
+
+- *Entitäten* des Entity-Relationship-Modells werden zu *Relationen*
+- *Attribute* des Entity-Relationship-Modells werden zu *Domänen*
+- *`m`-zu-`n` Beziehungen* werden zu *(Hilfs-)Relationen*
+- *Alle anderen Beziehungen* werden zu *Domänen*
+
+---
+
+### Abbildung von Beziehungen
 
 TODO
 
@@ -239,7 +280,7 @@ TODO
 
 ### Relationale Operationen
 
-Die relationale Algebra umfasst die folgenden Operationen:
+Für die Auswertung der Daten gibt es folgende Operationen:
 
 - Vereinigung, Schnittmenge, Differenz, Symmetrische Differenz, Kartesisches Produkt
 - Projektion und Selektion
