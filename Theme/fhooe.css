@@ -68,3 +68,7 @@ ins.fk {
 ins.pfk {
     text-decoration-style: double;
 }
+
+div.box {
+    border: 1px solid black;
+}

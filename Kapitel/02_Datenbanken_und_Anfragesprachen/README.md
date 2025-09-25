@@ -512,7 +512,15 @@ TODO
 
 ### Vereingung
 
-TODO
+Gegeben seien zwei Relationen $R,S \subseteq D_1 \times ... \times D_n$ mit $n \in \mathbb{N}$. Wir definieren die Vereinigung beider Relationen $R \cup S$ wie folgt:
+
+<div class="box">
+
+$R \cup S = \{ t : t \in R \vee t \in S \}$
+
+</div>
+
+Somit beinhaltet die Vereingung der beiden Relationen sowohl alle Tupel aus $R$, als auch alle Tupel aus $S$ (Duplikate existieren **nicht** doppelt).
 
 </div>
 <div>
@@ -529,7 +537,15 @@ TODO
 
 ### Schnittmenge
 
-TODO
+Gegeben seien zwei Relationen $R,S \subseteq D_1 \times ... \times D_n$ mit $n \in \mathbb{N}$. Wir definieren die Schnittmenge beider Relationen $R \cap S$ wie folgt:
+
+<div class="box">
+
+$R \cap S = \{ t : t \in R \wedge t \in S \}$
+
+</div>
+
+Somit beinhaltet die Schnittmenge der beiden Relationen alle Tupel aus $R$, die gleichzeitig **auch** in $S$ enthalten sind.
 
 </div>
 <div>
@@ -546,7 +562,15 @@ TODO
 
 ### Differenz
 
-TODO
+Gegeben seien zwei Relationen $R,S \subseteq D_1 \times ... \times D_n$ mit $n \in \mathbb{N}$. Wir definieren die Differenz beider Relationen $R \setminus S$ wie folgt:
+
+<div class="box">
+
+$R \setminus S = \{ t : t \in R \wedge t \notin S \}$
+
+</div>
+
+Somit beinhaltet die Differenz der beiden Relationen alle Tupel aus $R$, die **nicht** gleichzeitig auch in $S$ enthalten sind.
 
 </div>
 <div>
@@ -563,7 +587,17 @@ TODO
 
 ### Symmetrische Differenz
 
-TODO
+Gegeben seien zwei Relationen $R,S \subseteq D_1 \times ... \times D_n$ mit $n \in \mathbb{N}$. Wir definieren die symmetrische Differenz beider Relationen $R \triangle S$ wie folgt:
+
+<div class="box">
+
+$R \triangle S = \{ t : (t \in R \wedge t \notin S) \vee (t \notin R \wedge t \in S) \}$
+$= \{ t : t \in R \wedge t \notin S \} \cup \{ t: t \notin R \wedge t \in S \}$
+$= (R \setminus S) \cup (S \setminus R$)
+
+</div>
+
+Somit beinhaltet die symmetrische Differenz der beiden Relationen alle Tupel aus $R$, die **nicht** gleichzeitig auch in $S$ enthalten sind, sowie alle Tupel aus $S$, die **nicht** gleichzeitig auch in $R$ enthalten sind.
 
 </div>
 <div>
@@ -580,7 +614,16 @@ TODO
 
 ### Kartesisches Produkt
 
-TODO
+Gegeben seien zwei Relationen $R \subseteq D_1 \times ... \times D_m$ mit $m \in \mathbb{N}$ und $S \subseteq D_{m+1} \times ... \times D_{m + n}$ mit $n \in \mathbb{N}$. Wir definieren das kartesische Produkt beider Relationen $R \times S$ wie folgt:
+
+<div class="box">
+
+$R \times S : \{(t_1, ... , t_m, t_{m+1}, ..., t_{m+n}) :$
+$(t_1, ..., t_m) \in R \wedge (t_{m+1}, ..., t_{m + n}) \in S \}$
+
+</div>
+
+Somit wird jedes Tupel aus $R$ mit jedem Tupel aus $S$ kombiniert (Relationenschema können unterschiedlich sein).
 
 </div>
 <div>
@@ -597,7 +640,17 @@ TODO
 
 ### Join
 
-TODO
+Gegeben seien zwei Relationen $R \subseteq D_1 \times ... \times D_m$ mit $m \in \mathbb{N}$ und $S \subseteq D_{m+1} \times ... \times D_{m + n}$ mit $n \in \mathbb{N}$.
+
+Gegeben sei des Weiteren ein Prädikat $P: D_1 \times ... \times D_{m+n} \rightarrow \mathbb{B}$ als Funktion über den kombinierten Domänen.
+
+Wir definieren den Join beider Relationen mit Prädikat $R \bowtie_P S$ wie folgt:
+
+<div class="box">
+
+$R \bowtie_P S = \{t \in R \times S : P(t) = 1\}$
+
+</div>
 
 </div>
 <div>
