@@ -491,6 +491,23 @@ TODO
 ---
 
 <div class="columns">
+<div>
+
+### Gruppierung
+
+TODO
+
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/8/84/Relational_Algebra_Aggregation.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
 <div class="two">
 
 ### Vereingung
@@ -688,23 +705,6 @@ TODO
 <div>
 
 ![](https://upload.wikimedia.org/wikipedia/commons/e/e0/Relational_Algebra_Cartesian_Division.svg)
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div>
-
-### Gruppierung
-
-TODO
-
-</div>
-<div>
-
-![](https://upload.wikimedia.org/wikipedia/commons/8/84/Relational_Algebra_Aggregation.svg)
 
 </div>
 </div>
