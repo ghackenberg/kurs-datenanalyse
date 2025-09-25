@@ -448,70 +448,266 @@ Zusätzliche *Relation* mit *Domänen* für Fremdschlüssel, die einen zusammeng
 
 Für die Auswertung der Daten gibt es folgende Operationen:
 
-- Vereinigung, Schnittmenge, Differenz, Symmetrische Differenz, Kartesisches Produkt
 - Projektion und Selektion
-- Join, Equi-Join, Natural Join, Outer Join, Anti Join
-- Umbenennung und Division
+- Vereinigung, Schnittmenge, (Symmetrische) Differenz
+- Kartesisches Produkt, Join, Equi-Join, Natural Join, Left/Right/Full Outer Join
+- Division
+- Gruppierung
 
 ---
 
-### Vereingung
-
-TODO
-
----
-
-### Schnittmenge
-
-TODO
-
----
-
-### Differenz
-
-TODO
-
----
-
-### Symmetrische Differenz
-
-TODO
-
----
-
-### Kartesisches Produkt
-
-TODO
-
----
+<div class="columns">
+<div class="two">
 
 ### Projektion
 
 TODO
 
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/3/31/Relational_Algebra_Single_Table_Projection.svg)
+
+</div>
+</div>
+
 ---
+
+<div class="columns">
+<div class="two">
 
 ### Selektion
 
 TODO
 
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/2/28/Relational_Algebra_Single_Table_Selection.svg)
+
+</div>
+</div>
+
 ---
+
+<div class="columns">
+<div class="two">
+
+### Vereingung
+
+TODO
+
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/1/17/Relational_Algebra_Set_Theory_Union.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+### Schnittmenge
+
+TODO
+
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/c/c0/Relational_Algebra_Set_Theory_Intersection.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+### Differenz
+
+TODO
+
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/e/e2/Relational_Algebra_Set_Theory_Difference.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+### Symmetrische Differenz
+
+TODO
+
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/9/94/Relational_Algebra_Set_Theory_Symmetric_Difference.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Kartesisches Produkt
+
+TODO
+
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/d/d6/Relational_Algebra_Cartesian_Product.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
 
 ### Join
 
 TODO
 
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/b/be/Relational_Algebra_Join.svg)
+
+</div>
+</div>
+
 ---
 
-### Umbenennung
+<div class="columns">
+<div>
+
+### Equi-Join
 
 TODO
 
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/6/65/Relational_Algebra_Join_Equijoin.svg)
+
+</div>
+</div>
+
 ---
+
+<div class="columns">
+<div>
+
+### Natural Join
+
+TODO
+
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/8/82/Relational_Algebra_Join_Natural_Join.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Left Outer Join
+
+TODO
+
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/0/01/Relational_Algebra_Outer_Join_Left_Outer_Join.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Right Outer Join
+
+TODO
+
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/6/62/Relational_Algebra_Outer_Join_Right_Outer_Join.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Full Outer Join
+
+TODO
+
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/7/7d/Relational_Algebra_Outer_Join_Full_Outer_Join.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
 
 ### Division
 
 TODO
+
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/e/e0/Relational_Algebra_Cartesian_Division.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Gruppierung
+
+TODO
+
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/commons/8/84/Relational_Algebra_Aggregation.svg)
+
+</div>
+</div>
 
 ---
 
