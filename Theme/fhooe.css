@@ -38,6 +38,10 @@ section div.columns {
     gap: 2rem;
 }
 
+section div.columns.top {
+    align-items: flex-start;
+}
+
 section div.columns > div {
     flex-basis: 1rem;
     flex-grow: 1;
@@ -56,4 +60,11 @@ section div.columns > div.five {
 }
 section div.columns > div.six {
     flex-grow: 6;
+}
+
+ins.fk {
+    text-decoration-style: dashed;
+}
+ins.pfk {
+    text-decoration-style: double;
 }

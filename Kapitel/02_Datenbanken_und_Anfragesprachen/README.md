@@ -53,6 +53,18 @@ Des Weiteren können Bedingungen an Attribute geknüpft werden:
 
 ---
 
+![bg right:45%](./Zusammengesetzter-Primärschlüssel.png)
+
+### Zusammengesetzte Primärschlüssel
+
+Auch eine Kombination mehrerer Attribute kann eine Entität eindeutig identifizieren:
+
+- Längen- und Breitengrad identifiziert einen Ort auf dem Globus eindeutig
+- Land, Ortschaft, Straße, Hausnummer identifiziert eine Postanschrift eindeutig
+- Fluglinie, Quell- und Zielflughafen, sowie Abflugdatum und -uhrzeit identifizieren einen Flug eindeutig
+
+---
+
 ### Beziehungen und Kardinalitäten
 
 Des Weiteren kann man anhand der Kardinalitäten (`1` oder `m` bzw. `n`) mehrere Arten von Beziehungen zwischen zwei Entitäten `A` und `B` unterscheiden:
@@ -265,14 +277,168 @@ Entity-Relationship-Modelle können einfach in Relationen überführt werden:
 
 - *Entitäten* des Entity-Relationship-Modells werden zu *Relationen*
 - *Attribute* des Entity-Relationship-Modells werden zu *Domänen*
-- *`m`-zu-`n` Beziehungen* werden zu *(Hilfs-)Relationen*
-- *Alle anderen Beziehungen* werden zu *Domänen*
+- *Beziehungen* des Entity-Relationship-Modells werden abhängig von den Kardinalitäten zu Domänen für Fremdschlüssel und Hilfsrelationen
 
 ---
 
-### Abbildung von Beziehungen
+### Abbildung von Entitäten und Attributen
 
-TODO
+Das folgende Beispiel zeigt, wie Entitäten und deren Attribute auf Relationen und Domänen abgebildet werden:
+
+<div class="columns top">
+<div>
+
+**Entität *Person***
+
+![](./Diagramme/ER-Modell-Entität.svg)
+
+</div>
+<div class="three">
+
+**Relation *Person* ($P \subseteq D_1 \times D_2 \times D_3 \times D_4$)**
+
+| <ins>ID</ins> ($D_1$) | Vorname ($D_2$) | Nachname ($D_3$) | Email ($D_4$) |
+|-|-|-|-|
+| 1 | Roman | Froschauer | ...@fh-wels.at |
+| 2 | Martin | Jordan | ...@fh-wels.at |
+| 3 | Georg | Hackenberg | ...@fh-wels.at |
+| ... | ... | ... | ... |
+
+</div>
+</div>
+
+---
+
+### Abbildung von `1`-zu-`1` Beziehungen
+
+Zusätzliche *Domänen* für Fremdschlüssel in **beiden** Relationen (oder optional nur einer der beiden Relationen auch möglich):
+
+<div class="columns top">
+<div>
+
+**ER-Modell**
+
+![](./Diagramme/ER-Modell-Beziehung-1-zu-1.svg)
+
+</div>
+<div>
+
+**Relation *Person***
+
+| <ins>ID</ins> | <ins class="fk">Adresse_ID</ins> | Nachname | ... |
+|-|-|-|-|
+| 1 | 1 | Müller | ... |
+| 2 | 2 | Muster | ... |
+| 3 | 3 | Maier | ... |
+| ... | ... | ... | ... |
+
+</div>
+<div>
+
+**Relation *Adresse***
+
+| <ins>ID</ins> | <ins class="fk">Person_ID</ins> | Ort |... |
+|-|-|-|-|
+| 1 | 1 | Wels | ... |
+| 2 | 2 | Linz | ... |
+| 3 | 3 | Steyr | ... |
+| ... | ... | ... | ... |
+
+</div>
+</div>
+
+---
+
+### Abbildung von `1`-zu-`n` Beziehungen
+
+Zusätzliche *Domänen* für Fremdschlüssel in **nur einer** Relation (welche mit der Kardinalität `n` auftritt):
+
+<div class="columns top">
+<div>
+
+**ER-Modell**
+
+![](./Diagramme/ER-Modell-Beziehung-1-zu-n.svg)
+
+</div>
+<div>
+
+**Relation *Projekt***
+
+| <ins>ID</ins> | Name | ... |
+|-|-|-|
+| 1 | Projekt A | ... |
+| 2 | Projekt B | ... |
+| 3 | Projekt C | ... |
+| ... | ... | ... |
+
+</div>
+<div>
+
+**Relation *Arbeitspaket***
+
+| <ins>ID</ins> | <ins class="fk">Projekt_ID</ins> | Bezeichung | ... |
+|-|-|-|-|
+| 1 | 1 | Anforderungsanalyse | ... |
+| 2 | 1 | Systementwurf | ... |
+| 3 | 1 | Umsetzung | ... |
+| ... | ... | ... | ... |
+
+</div>
+</div>
+
+---
+
+### Abbildung von `m`-zu-`n` Beziehungen
+
+Zusätzliche *Relation* mit *Domänen* für Fremdschlüssel, die einen zusammengesetzten Primärschlüssel ergeben (plus optional weitere Beziehungsattribute):
+
+<div class="columns top">
+<div>
+
+**ER-Modell**
+
+![](./Diagramme/ER-Modell-Beziehung-m-zu-n.svg)
+
+</div>
+<div>
+
+**Relation *Projekt***
+
+| <ins>ID</ins> | Name | ... |
+|-|-|-|
+| 1 | Projekt A | ... |
+| 1 | Projekt B | ... |
+| 1 | Projekt C | ... |
+| ... | ... | ... |
+
+</div>
+<div>
+
+**Relation *ProPer***
+
+| <ins class="pfk">Pro_ID</ins> | <ins class="pfk">Per_ID</ins> |
+|-|-|
+| 1 | 1 |
+| 1 | 2 |
+| 2 | 3 |
+|-|-|
+
+
+</div>
+<div>
+
+**Relation *Person***
+
+| <ins>ID</ins> | Nachname | ... |
+|-|-|-|
+| 1 | Müller | ... |
+| 1 | Muster | ... |
+| 1 | Maier | ... |
+| ... | ... | ... |
+
+</div>
+</div>
 
 ---
 
