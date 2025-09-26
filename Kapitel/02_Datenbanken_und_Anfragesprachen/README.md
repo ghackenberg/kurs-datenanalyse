@@ -1326,6 +1326,7 @@ Hier betrachten wir die folgenden relationalen Operationen sowie die Sortierung 
 - Projektion
 - Selektion
 - Kartesisches Produkt
+- Inner und Outer Join
 - Gruppierung
 - **Sortierung**
 
@@ -1428,25 +1429,92 @@ $P(t) = (t_{\{Proj.ID\}} = t_{\{Zuord.Projekt\_ID\}} \wedge t_{\{Mitarb.ID\}} = 
 
 ---
 
+### (Inner) Join
+
+Für den (Inner) Join müssen die **Tabellen** angegeben werden, welche mit einander verbunden werden sollen, sowie das **Join-Prädikat**:
+
+Syntax:
+
+```sql
+select * from Projekt inner join Zuordnung on
+
+  Projekt.ID = Zuordnung.Projekt_ID
+```
+
+Semantik:
+
+$Projekt \bowtie_{ID = Projekt\_ID} Zuordnung$ (es handelt sich hier um einen Equi-Join!)
+
+</div>
+<div>
+
+</div>
+</div>
+
+---
+
+### Left / Right / Full Outer Join
+
+Und so sehen die Outer Join Varianten in der Sprache SQL aus:
+
+```sql
+-- Left outer join
+
+select * from Projekt left join Zuordnung on
+  Projekt.ID = Zuordnung.Projekt_ID
+
+-- Right outer join
+
+select * from Projekt right join Zuordnung on
+  Projekt.ID = Zuordnung.Projekt_ID
+
+-- Full outer join
+
+select * from Projekt full outer join Zuordnung on
+  Projekt.ID = Zuordnung.Projekt_ID
+```
+
+---
+
 ### Gruppierung
 
 Syntax:
 
 ```sql
-select Vorname, Nachname, Count(*) from Projekt, Zuordnung, Mitarbeiter where
+select Vorname, Nachname, Count(*) from Zuordnung, Mitarbeiter where
 
-  Projekt.ID = Zuordnung.Projekt_ID and Mitarbeiter.ID == Zuordnung.Mitarbeiter_ID
+  Mitarbeiter.ID == Zuordnung.Mitarbeiter_ID
 
 group by Vorname, Nachname
 ```
 
 Semantik:
 
-$\gamma_{\Delta,F}(\sigma_P(Projekt \times Zuordnung \times Mitarbeiter))$ mit
-
-$P(t) = (t_{\{Proj.ID\}} = t_{\{Zuord.Projekt\_ID\}} \wedge t_{\{Mitarb.ID\}} = t_{\{Zuord.Mitarbeiter\_ID\}})$ und
+$\gamma_{\Delta,F}(Zuordnung \bowtie_{Mitarbeiter\_ID=ID} Mitarbeiter)$ mit
 
 $\Delta = \{Vorname, Nachname\}$ und $F = f_1$ und $f_1(x) = |x|$
+
+---
+
+### Gruppierung (mit Selektion)
+
+Syntax:
+
+```sql
+select Vorname, Nachname, Count(*) from Zuordnung, Mitarbeiter where
+
+  Mitarbeiter.ID == Zuordnung.Mitarbeiter_ID
+
+group by Vorname, Nachname having
+
+  Count(*) > 10
+```
+
+Semantik:
+
+$\sigma_P(\gamma_{\Delta,F}(Zuordnung \bowtie_{Mitarbeiter\_ID=ID} Mitarbeiter))$ mit
+
+$\Delta = \{Vorname, Nachname\}$ und $F = f_1$ und $f_1(x) = |x|$ und $P(t) = (|x| > 10)$
 
 ---
 
