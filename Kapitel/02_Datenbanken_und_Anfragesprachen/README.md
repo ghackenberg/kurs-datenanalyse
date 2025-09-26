@@ -971,7 +971,510 @@ So kannst du dein Verständnis noch weiter vertiefen:
 
 ## Structured Query Language
 
-TODO
+Standardsprache für die Arbeit mit relationalen Datenbanken bestehend aus drei Teilbereichen:
+
+- **Data Definition Language** für die Verwaltung von Tabellen
+- **Data Manipulation Language** für die Verwaltung von Datensätzen
+- **Data Query Language** für das Auslesen von Daten
+
+---
+
+![bg right](./Data-Definition-Language.png)
+
+### Data Definition Language (DDL)
+
+Die DDL umfasst die folgenden drei Anweisungen in ihren unterschied-lichen Varianten:
+
+- `create table` für das Erstellen von Tabellen
+- `alter table` für das Ändern von bereits erstellten Tabellen
+- `drop table` für das Löschen von bereits erstellten Tabellen
+
+---
+
+<div class="columns">
+<div>
+
+### Anweisung `create table`
+
+Für das Erstellen einer neuen Tabelle müssen die folgenden Informationen angegeben werden:
+
+- Name der neuen Tabelle
+- Liste der Spalten inklusive
+  - Name,
+  - Datentyp und
+  - einer Liste von Bedingungen (optional)
+
+</div>
+<div>
+
+```sql
+create table Tabellenname (
+
+  Spaltenname1 Datentyp [Bedingungen],
+
+  Spaltenname2 Datentyp [Bedingungen],
+
+  Spaltenname3 Datentyp [Bedingungen]
+
+  ...
+
+)
+```
+
+</div>
+</div>
+
+---
+
+### Auswahl an verfügbaren Datentypen
+
+Speicherung von Zeichenketten, Zahlen, und Datum bzw. Uhrzeit:
+
+<div class="columns top">
+<div>
+
+**Zeichenketten**
+
+Daten mit und ohne Zeichencode-Tabelle:
+
+- `BINARY`
+- `VARBINARY`
+- `CHAR`
+- `VARCHAR`
+
+</div>
+<div>
+
+**Zahlen**
+
+Unterschiedliche Werte-bereiche und Genauigkeit:
+
+- `BOOLEAN`
+- `INT`
+- `FLOAT`
+- `DOUBLE`
+- `DECIMAL`
+
+</div>
+<div>
+
+**Datum/Uhrzeit**:
+
+Datum/Uhrzeit getrennt oder kombiniert:
+
+- `DATE`
+- `TIME`
+- `DATETIME`
+
+</div>
+</div>
+
+---
+
+![bg right](./Zeichenketten-Unterschiede.png)
+
+### Unterschiede bei Zeichenketten
+
+Unterscheidung zwischen fixer und variabler Länger der Byte- oder Zeichenketten:
+
+- Fixe Länge ist potenziell schneller beim Zugriff, aber verschwendet Speicherkapazität (z.B. Nutzernamen)
+- Variable Länge ist potenziell langsamer beim Zugriff, aber nutzt den Speicher effizienter (z.B. Beschreibungstexte)
+
+---
+
+### Arten von Bedingungen
+
+- `NOT NULL` - Jeder Datensatz muss einen Wert für die Spalte haben (z.B. Preis eines Produktes in einem Web-Shop)
+- `UNIQUE` - Jeder Datensatz muss einen **eindeutigen** Wert für die Spalte haben (z.B. Nutzername oder E-Mail-Adresse)
+- `PRIMARY KEY` - Der Wert der Spalte(n) identifiziert den Datensatz eindeutig (z.B. Seriennummer eines Produkts)
+- `FOREIGN KEY` - Der Wert der Spalte verweist auf einen Datensatz aus derselben oder einer anderen Tabelle (z.B. Produkt einer Kundenrezession)
+- `CHECK` - Allgemeiner boolscher Ausdruck, der zur Laufzeit ausgewertet werden muss (z.B. Korrektheit einer E-Mail-Adresse)
+
+---
+
+### Beispiel für Bedingungen
+
+Das folgende Beispiel zeigt den Einsatz von Bedingungen für Spalten:
+
+<div class="columns top">
+<div>
+
+**Tabelle für *Lektoren***
+
+```sql
+create table Lektor (
+
+  ID int primary key,
+
+  Vorname CHAR(100) not null,
+
+  Nachname CHAR(100) not null
+
+)
+```
+
+</div>
+<div>
+
+**Tabelle für *Vorlesungen***
+
+```sql
+create table  Vorlesung (
+
+  ID int primary key,
+
+  Lektor_ID int foreign key
+    references Lektor(ID),
+
+  Name CHAR(100) not null unique,
+
+)
+```
+
+</div>
+</div>
+
+---
+
+### Zusammengesetzte Primärschlüssel
+
+Und so werden zusammengesetzte Primärschlüssel definiert:
+
+<div class="columns">
+<div>
+
+**Tabelle *Projekt***
+
+```sql
+create table Projekt (
+  ID int primary key,
+  ...
+)
+```
+
+**Tabelle *Mitarbeiter***
+
+```sql
+create table Mitarbeiter (
+  ID int primary key,
+  ...
+)
+```
+
+</div>
+<div>
+
+**Tabelle *Zuordnung***
+
+
+
+```sql
+create table Zuordnung (
+  
+  Projekt_ID int foreign key
+    references Mitarbeiter(ID),
+  
+  Mitarbeiter_ID int foreign key
+    references Mitarbeiter(ID),
+
+  constraint PK primary key
+    (Projekt_ID, Mitarbeiter_ID)
+
+)
+```
+
+</div>
+</div>
+
+---
+
+### Anweisung `alter table`
+
+Das Schema einer Tabelle kann auch nachträglich noch verändert werden (solange die Bedingungen dadurch nicht verletzt werden):
+
+<div class="columns">
+<div>
+
+**Spalte *hinzufügen***
+
+```sql
+alter table Projekt
+  add column Beginn Time
+```
+
+**Spalte *löschen***
+
+```sql
+alter table Projekt
+  drop column Beginn
+```
+
+</div>
+<div>
+
+**Spalte *ändern***
+
+```sql
+alter table Projekt
+  alter column Beginn Date
+```
+
+**Spalte *umbenennen***
+
+```sql
+alter table Projekt
+  rename column Beginn to Anfang
+```
+
+</div>
+</div>
+
+---
+
+![bg right](./Tabelle-Löschen.png)
+
+### Anweisung `drop table`
+
+Schließlich können gesame Tabellen auch wieder mit einer einzigen kurzen Anweisung gelöscht werden:
+
+```sql
+drop table Projekt
+```
+
+Dies funktioniert aber nur, wenn dadurch keine Bedingungen (z.B. Fremdschlüssel) verletzt werden.
+
+---
+
+![bg right](./Data-Manipulation-Language.png)
+
+### Data Manipulation Language
+
+Für die Manipulation der Daten in einer Tabelle stehen die folgenden Anweisungen zur Verfügung:
+
+- `insert into` fügt neue Datensätze in eine Tabelle ein
+- `update` aktualisiert bestehende Datensätze einer Tabelle
+- `delete from` löscht Datensätze aus einer Tabelle heraus
+
+---
+
+### Anweisung `insert into`
+
+Allgemein müssen mein Einfügen von Datensätzen der **Tabellenname** sowie die **Spaltenwerte** angegeben werden:
+
+```sql
+insert into Tabelle (Spalt1, Spalte2, ...) values (Wert1, Wert2, ...)
+```
+
+Und hier sind ein paar **konkrete Anwendungsbeispiele** für unsere vorige Projekt- und Mitarbeiterdatenbank:
+
+```sql
+insert into Projekt (ID, Name) values (1, "Erstes Projekt")
+
+insert into Mitarbeiter (ID, Vorname, Nachname) values (1, "Hans", "Muster")
+
+insert into Zuordnung (Projekt_ID, Mitarbeiter_ID) values (1, 1)
+```
+
+---
+
+### Anweisung `update`
+
+Zunächst wieder die allgemeine Form der Aktualisierungsanweisung mit **Tabellenname**, **Spalten** und neuen **Werten**, sowie einem **Prädikat** für die Auswahl von Datensätzen:
+
+```sql
+update Tabelle set Spalte1 = Wert1, Spalte2 = Wert2, ... where Prädikat
+```
+
+Und hier sind wieder **konkrete Anwendungsbeispiele** für unsere einfache Projekt-datenbank von vorhin:
+
+```sql
+update Projekt set Name = "Neuer Name" where ID = 1
+
+update Mitarbeiter set Vorname = "Neuer Vorname" where ID = 1
+
+update Zuordnung set Projekt_ID = 2 where Mitarbeiter_ID = 1
+```
+
+---
+
+### Anweisung `delete`
+
+Schließlich hier auch noch die allgemeine Form der Anweisung für das Löschen von ausgewählten Datensätzen aus **Tabellen** mittels einem **Prädikat**:
+
+```sql
+delete from Tabelle where Prädikat
+```
+
+Schließlich auch für diesen Fall noch ein paar **konkrete Anwendungsfälle** auf Basis unserer Projektdatenbank:
+
+```sql
+delete from Zuordnung where Projekt_ID = 1 or Mitarbeiter_ID = 1
+
+delete from Mitarbeiter where ID = 1
+
+delete from Projekt where ID = 1
+```
+
+---
+
+![bg right](./Data-Query-Language.png)
+
+### Data Query Language (DQL)
+
+Hier betrachten wir die folgenden relationalen Operationen sowie die Sortierung als zusätzliche Operation:
+
+- Projektion
+- Selektion
+- Kartesisches Produkt
+- Gruppierung
+- **Sortierung**
+
+---
+
+### Projektion und Selektion
+
+Zunächst widmen wir uns der Projektion und Selektion:
+
+<div class="columns top">
+<div>
+
+**Projektion**
+
+Syntax:
+
+```sql
+select Name from Projekt
+```
+
+Sematik:
+
+$\pi_{\{Name\}}(Projekt)$
+
+</div>
+<div>
+
+**Selektion**
+
+Syntax:
+
+```sql
+select * from Projekt where ID = 1
+```
+
+Semantik:
+
+$\sigma_{ID = 1}(Projekt)$
+
+</div>
+</div>
+
+---
+
+### Kartesisches Produkt
+
+Wenn das kartesische Produkt mehrerer Tabellen gebilet werden soll, müssen die Namen der Tabellen einfach durch Komma getrennt angegeben werden. Das folgende Beispiel berechnet das **vollständige kartesische Produkt**.
+
+Syntax:
+
+```sql
+select * from Projekt, Zuordnung, Mitarbeiter
+```
+
+Semantik:
+
+$Projekt \times Zuordnung \times Mitarbeiter$
+
+---
+
+### Kartesisches Produkt (mit Selektion)
+
+Im folgende Beispiel wird zusätzlich eine Selektion angewendet, um **nur relevante Kombinationen von Datensätzen** zu erhalten.
+
+Syntax:
+
+```sql
+select Name, Vorname, Nachname from Projekt, Zuordnung, Mitarbeiter where
+  
+  Projekt.ID = Zuordnung.Projekt_ID and Mitarbeiter.ID = Zuordnung.Mitarbeiter_ID
+```
+
+Semantik:
+
+$\sigma_P(Projekt \times Zuordnung \times Mitarbeiter)$ mit
+
+$P(t) = (t_{\{Proj.ID\}} = t_{\{Zuord.Projekt\_ID\}} \wedge t_{\{Mitarb.ID\}} = t_{\{Zuord.Mitarbeiter\_ID\}})$
+
+---
+
+### Kartesisches Produkt (mit Selektion und Projektion)
+
+Schließlich lassen sich auch **überflüssige Spalten** über eine Projektion **ausblenden**.
+
+Syntax:
+
+```sql
+select Name, Vorname, Nachname from Projekt, Zuordnung, Mitarbeiter where
+  
+  Projekt.ID = Zuordnung.Projekt_ID and Mitarbeiter.ID = Zuordnung.Mitarbeiter_ID
+```
+
+Semantik:
+
+$\pi_\Delta(\sigma_P(Projekt \times Zuordnung \times Mitarbeiter))$ mit
+
+$\Delta = \{Name, Vorname, Nachname\}$ und
+
+$P(t) = (t_{\{Proj.ID\}} = t_{\{Zuord.Projekt\_ID\}} \wedge t_{\{Mitarb.ID\}} = t_{\{Zuord.Mitarbeiter\_ID\}})$
+
+---
+
+### Gruppierung
+
+Syntax:
+
+```sql
+select Vorname, Nachname, Count(*) from Projekt, Zuordnung, Mitarbeiter where
+
+  Projekt.ID = Zuordnung.Projekt_ID and Mitarbeiter.ID == Zuordnung.Mitarbeiter_ID
+
+group by Vorname, Nachname
+```
+
+Semantik:
+
+$\gamma_{\Delta,F}(\sigma_P(Projekt \times Zuordnung \times Mitarbeiter))$ mit
+
+$P(t) = (t_{\{Proj.ID\}} = t_{\{Zuord.Projekt\_ID\}} \wedge t_{\{Mitarb.ID\}} = t_{\{Zuord.Mitarbeiter\_ID\}})$ und
+
+$\Delta = \{Vorname, Nachname\}$ und $F = f_1$ und $f_1(x) = |x|$
+
+---
+
+![bg contain right:40%](./Aggregationsfunktionen.png)
+
+### Aggregationsfunktionen
+
+Standardmäßig werden die folgenden fünf Funktionen für die Aggregation von Daten bereitgestellt:
+
+- `COUNT(...)` = Anzahl von Datensätzen
+- `SUM(...)` = Summe von Zahlenwerten
+- `MIN(...)` = Minimum von Zahlenwerten
+- `MAX(...)` = Maximum von Zahlenwerten
+- `AVG(...)` = Mittelwert von Zahlenwerten
+
+---
+
+### Sortierung
+
+Schließlich bietet SQL auch die Möglichkeit, die Reihenfolge von Daten zu verändern. Hierbei kann sowohl die **Sortierrichtung** angegeben werden, als auch eine **hierarchische Sortierung** nach mehreren Attributen durchgeführt werden:
+
+```sql
+select * from Mitarbeiter order by Nachname ASC, Vorname DESC
+```
+
+Beachte, dass die **Sortierung in der *relationalen Algebra* nicht berücksichtigt** wird. Dies liegt dara, dass in der relationalen Algebra Tabellen als *Mengen* betrachtet werden, und nicht als *Folgen* oder *Sequenzen* (siehe Kapitel 1).
+
+*Eine Adaption der relationalen Algebra auf Folgen oder Sequenzen wäre jedoch grundsätzlich schon möglich!*
 
 ---
 
@@ -981,4 +1484,26 @@ TODO
 
 So kannst du dein Verständnis noch weiter vertiefen:
 
-- TODO
+- Setzen Sie die vorigen Beispiele und Anfragen in SQLite um
+- Analysieren Sie die Daten aus der [SQLite-Beispieldatenbank](https://www.sqlitetutorial.net/sqlite-sample-database/)
+
+Nutzen Sie für die Umsetzung [DB Browser for SQLite](https://sqlitebrowser.org/) oder alternativ [SQLiteStudio](https://sqlitestudio.pl/).
+
+---
+
+### Aufbau der SQLite-Beispieldatenbank
+
+<div class="columns">
+<div>
+
+Das Diagramm auf der rechten Seite zeigt den Aufbau der Beispieldatenbank.
+
+Es handelt sich um Daten zu Künstlern, Musikstücken und Verkauf an Kunden.
+
+</div>
+<div class="three">
+
+![](https://www.sqlitetutorial.net/wp-content/uploads/2015/11/sqlite-sample-database-color.jpg)
+
+</div>
+</div>
