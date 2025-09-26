@@ -448,11 +448,38 @@ Zusätzliche *Relation* mit *Domänen* für Fremdschlüssel, die einen zusammeng
 
 Für die Auswertung der Daten gibt es folgende Operationen:
 
-- Projektion und Selektion
-- Vereinigung, Schnittmenge, (Symmetrische) Differenz
-- Kartesisches Produkt, Join, Equi-Join, Natural Join, Left/Right/Full Outer Join
-- Division
-- Gruppierung
+- **Unäre Operationen**: Projektion, Selektion und Gruppierung
+- **Binäre Operationen**: Vereinigung, Schnittmenge, Differenz, Kartesisches Produkt, Join, Equi-Join, Natural Join, Left/Right/Full Outer Join, Division
+
+---
+
+### Unäre relationale Operationen
+
+Unäre Operatonen arbeiten auf einer Relation $R \subseteq D_1 \times ... \times D_n$ mit $n \in \mathbb{N}$:
+
+<div class="columns top">
+<div>
+
+**1. Projektion $\pi_\Delta(R)$**
+
+![](https://upload.wikimedia.org/wikipedia/commons/3/31/Relational_Algebra_Single_Table_Projection.svg)
+
+</div>
+<div>
+
+**2. Selektion $\sigma_P(R)$**
+
+![](https://upload.wikimedia.org/wikipedia/commons/2/28/Relational_Algebra_Single_Table_Selection.svg)
+
+</div>
+<div>
+
+**3. Gruppierung $\gamma_{\Delta,F}(R)$**
+
+![](https://upload.wikimedia.org/wikipedia/commons/8/84/Relational_Algebra_Aggregation.svg)
+
+</div>
+</div>
 
 ---
 
@@ -461,7 +488,11 @@ Für die Auswertung der Daten gibt es folgende Operationen:
 
 ### Projektion
 
-TODO
+Gegeben sei eine Relation $R \subseteq D_1 \times ... \times D_n$ sowie eine Teilmenge $\Delta \subseteq \{D_1, ..., D_n\}$ mit $n \in \mathbb{N}$. Wir definieren die Projektion $\pi_\Delta(R)$ wie folgt:
+
+$\pi_\Delta(R) = \{ t_\Delta : t \in R \}$
+
+Hierbei repräsentiert $t$ die Tupel der ursprünglichen Relation $R$ über $\{ D_1, ..., D_n \}$, während $t_\Delta$ das zugehörige Tupel über der Teilmenge $\Delta$ beschreibt.
 
 </div>
 <div>
@@ -478,7 +509,15 @@ TODO
 
 ### Selektion
 
-TODO
+Gegeben sei eine Relation $R \subseteq D_1 \times ... \times D_n$ sowie ein Prädikat $P: D_1 \times ... \times D_n \rightarrow \mathbb{B}$ mit $n \in \mathbb{N}$. Wir definieren die Selektion $\sigma_P(R)$ wie folgt:
+
+<div class="box">
+
+$\sigma_P(R) = \{ t \in R : P(t) = 1 \}$
+
+</div>
+
+Die Selektion $\pi_P(R)$ liefert also die Teilmenge derjenigen Tupel $t \in R$, welche das Prädikat $P$ erfüllen, d.h. $P(t) = 1$.
 
 </div>
 <div>
@@ -495,12 +534,102 @@ TODO
 
 ### Gruppierung
 
-TODO
+Gegeben sei eine Relation $R \subseteq A_1 \times ... \times A_k \times B_1 \times ... \times B_m$ mit einer Menge von Gruppierungsattributen $\Delta = \{A_1, ..., A_k\}$ und $m,k \in \mathbb{N}$.
+
+Gegeben sei des Weiteren eine Liste $F = f_1,...,f_n$ von Aggregatfunktionen $f_i: \mathcal{P}(A_1 \times ... \times A_m \times B_1 \times ... \times B_k) \rightarrow C_i$ mit Aggregatdomänen $C_i$ und $n,i \in \mathbb{N}$.
+
+$\mathcal{P}(\cdot)$ repräsentiert hier eine beliebe Teilmenge von Tupeln der Relation $R$.
 
 </div>
 <div>
 
 ![](https://upload.wikimedia.org/wikipedia/commons/8/84/Relational_Algebra_Aggregation.svg)
+
+</div>
+</div>
+
+---
+
+![bg right:35%](./Gruppierung.png)
+
+### Gruppierung (cont'd)
+
+$m,n,k,i \in \mathbb{N}$
+
+$R \subseteq A_1 \times ... \times A_m \times B_1 \times ... \times B_m$ (= Relation)
+$\Delta = \{A_1, ..., A_k\}$ (= Gruppierungsattribute)
+$F = f_1,...,f_n$ (= Aggregatfunktionen)
+
+Wir definieren die Gruppierung $\gamma_{\Delta,F}(R)$ wie folgt:
+
+<div class="box">
+
+$\gamma_{\Delta,F}(R) = \{ r_{\{B_1, ..., B_m\}} \cup (f_1(x), ..., f_n(x)) :$
+$r \in R \wedge x = \{ s \in R : s_{B_1,...,B_m} = r_{B_1,...,B_m} \} \}$
+
+</div>
+
+Beachte die Anwendung der Aggregatfunktionen auf die Teilmengen der Tupel $x \subseteq R$.
+
+---
+
+### Binäre relationale Operationen
+
+Binäre relationale Operationen arbeiten auf zwei Relationen $R$ und $S$:
+
+<div class="columns top">
+<div>
+
+**1. Identisches Schema**
+
+<div class="box">
+
+$n \in \mathbb{N}$
+
+$R \subseteq D_1 \times ... \times D_n$
+$S \subseteq D_1 \times ... \times D_n$
+
+</div>
+
+- Vereinigung
+- Schnittmenge
+- Differenz
+
+</div>
+<div>
+
+**2. Beliebiges Schema**
+
+<div class="box">
+
+$m,n \in \mathbb{N}$
+
+$R \subseteq A_1 \times ... \times A_m$
+$S \subseteq B_1 \times ... \times B_n$
+
+</div>
+
+- Kartesisches Produkt
+- Join
+- Equi-Join
+
+</div>
+<div>
+
+**3. Überschneidendes Sch.**
+
+<div class="box">
+
+$m,n,k,i \in \mathbb{N}$
+
+$R \subseteq A_1 \times ... \times B_k$
+$S \subseteq B_1 \times ... \times C_n$
+
+</div>
+
+- Natural Join
+- Outer Join
+- Division
 
 </div>
 </div>
@@ -587,13 +716,11 @@ Somit beinhaltet die Differenz der beiden Relationen alle Tupel aus $R$, die **n
 
 ### Symmetrische Differenz
 
-Gegeben seien zwei Relationen $R,S \subseteq D_1 \times ... \times D_n$ mit $n \in \mathbb{N}$. Wir definieren die symmetrische Differenz beider Relationen $R \triangle S$ wie folgt:
+Gegeben seien zwei Relationen $R,S \subseteq D_1 \times ... \times D_n$ mit $n \in \mathbb{N}$. Wir definieren die symmetrische Differenz beider Relationen $R - S$ wie folgt:
 
 <div class="box">
 
-$R \triangle S = \{ t : (t \in R \wedge t \notin S) \vee (t \notin R \wedge t \in S) \}$
-$= \{ t : t \in R \wedge t \notin S \} \cup \{ t: t \notin R \wedge t \in S \}$
-$= (R \setminus S) \cup (S \setminus R$)
+$R - S = (R \setminus S) \cup (S \setminus R$)
 
 </div>
 
@@ -614,16 +741,17 @@ Somit beinhaltet die symmetrische Differenz der beiden Relationen alle Tupel aus
 
 ### Kartesisches Produkt
 
-Gegeben seien zwei Relationen $R \subseteq D_1 \times ... \times D_m$ mit $m \in \mathbb{N}$ und $S \subseteq D_{m+1} \times ... \times D_{m + n}$ mit $n \in \mathbb{N}$. Wir definieren das kartesische Produkt beider Relationen $R \times S$ wie folgt:
+Gegeben seien zwei Relationen $R \subseteq A_1 \times ... \times A_m$ mit $m \in \mathbb{N}$ und $S \subseteq B_1 \times ... \times B_n$ mit $n \in \mathbb{N}$.
+
+Wir definieren das kartesische Produkt beider Relationen $R \times S$ wie folgt:
 
 <div class="box">
 
-$R \times S : \{(t_1, ... , t_m, t_{m+1}, ..., t_{m+n}) :$
-$(t_1, ..., t_m) \in R \wedge (t_{m+1}, ..., t_{m + n}) \in S \}$
+$R \times S : \{r \cup s : r \in R \wedge s \in S \}$
 
 </div>
 
-Somit wird jedes Tupel aus $R$ mit jedem Tupel aus $S$ kombiniert (Relationenschema können unterschiedlich sein).
+Somit wird jedes Tupel aus $R$ mit jedem Tupel aus $S$ kombiniert. Die Domänen der beiden Relationen können unterschiedlich sein.
 
 </div>
 <div>
@@ -638,7 +766,7 @@ Somit wird jedes Tupel aus $R$ mit jedem Tupel aus $S$ kombiniert (Relationensch
 <div class="columns">
 <div>
 
-### Join
+### Join (*Allgemeines Prädikat $P$*)
 
 Gegeben seien zwei Relationen $R \subseteq D_1 \times ... \times D_m$ mit $m \in \mathbb{N}$ und $S \subseteq D_{m+1} \times ... \times D_{m + n}$ mit $n \in \mathbb{N}$.
 
@@ -648,7 +776,7 @@ Wir definieren den Join beider Relationen mit Prädikat $R \bowtie_P S$ wie folg
 
 <div class="box">
 
-$R \bowtie_P S = \{t \in R \times S : P(t) = 1\}$
+$R \bowtie_P S = \pi_P(R \times S)$
 
 </div>
 
@@ -665,9 +793,19 @@ $R \bowtie_P S = \{t \in R \times S : P(t) = 1\}$
 <div class="columns">
 <div>
 
-### Equi-Join
+### Equi-Join (*Spezielles Prädikat $P$*)
 
-TODO
+Gegeben seien zwei Relationen $R \subseteq D_1 \times ... \times D_m$ mit $m \in \mathbb{N}$ und $S \subseteq D_{m+1} \times ... \times D_{m + n}$ mit $n \in \mathbb{N}$.
+
+Gegeben seien des Weiteren $i,j \in \mathbb{N}$ mit $i \leq m$ und $m < j \leq m + n$.
+
+Wir definieren den Equi-Join $R \bowtie_{i = j} S$ mit Prädikat $P(t) = (t_{\{D_i\}} = t_{\{D_j\}})$ wie folgt:
+
+<div class="box">
+
+$R \bowtie_{i = j} S = \pi_P(R \times S)$
+
+</div>
 
 </div>
 <div>
@@ -682,9 +820,20 @@ TODO
 <div class="columns">
 <div>
 
-### Natural Join
+### Natural Join (Prädikat + Projektion)
 
-TODO
+Gegeben seien zwei Relationen $R,S$ mit $R \subseteq A_1 \times ... \times A_m \times B_1 \times ... \times B_k$ und $S \subseteq B_1 \times ... \times B_k \times C_1 \times ... \times C_n$ sowie $m,n,k \in \mathbb{N}$.
+
+Wir definieren den Natural Join $R \bowtie S$ der beiden Relationen wie folgt:
+
+<div class="box">
+
+$R \bowtie S = \{ r \cup s_{\{C_1,...,C_n\}} : r \in R \wedge$
+$s \in S \wedge r_{\{B_1,...,B_k\}} = s_{\{B_1,...,B_k\}} \}$
+
+</div>
+
+Beachte, dass Duplikate der Domänen $B_1,...,B_k$ ausgeblendet werden.
 
 </div>
 <div>
@@ -701,7 +850,18 @@ TODO
 
 ### Left Outer Join
 
-TODO
+Gegeben seien zwei Relationen $R,S$ mit $R \subseteq A_1 \times ... \times A_m \times B_1 \times ... \times B_k$ und $S \subseteq B_1 \times ... \times B_k \times C_1 \times ... \times C_n$ sowie $m,n,k \in \mathbb{N}$.
+
+Wir definieren den Left Outer Join $R \triangleright S$ der beiden Relationen wie folgt:
+
+<div class="box">
+
+$R \triangleright S = (R \bowtie S) \cup \{r \cup (\bot,...,\bot) :$
+$r \in R \wedge \nexists s \in S : r_{\{B_1,...,B_k\}} = s_{\{B_1,...,B_k\}}\}$
+
+</div>
+
+Tupel aus $R$ **ohne** *Join-Partner* in $S$ sind trotzdem enthalten.
 
 </div>
 <div>
@@ -718,7 +878,18 @@ TODO
 
 ### Right Outer Join
 
-TODO
+Gegeben seien zwei Relationen $R,S$ mit $R \subseteq A_1 \times ... \times A_m \times B_1 \times ... \times B_k$ und $S \subseteq B_1 \times ... \times B_k \times C_1 \times ... \times C_n$ sowie $m,n,k \in \mathbb{N}$.
+
+Wir definieren den Right Outer Join $R \triangleleft S$ der beiden Relationen wie folgt:
+
+<div class="box">
+
+$R \triangleleft S = (R \bowtie S) \cup \{(\bot,...,\bot) \cup s :$
+$s \in S \wedge \nexists r \in R : s_{\{B_1,...,B_k\}} = r_{\{B_1,...,B_k\}}\}$
+
+</div>
+
+Tupel aus $S$ **ohne** *Join-Partner* in $R$ sind trotzdem enthalten.
 
 </div>
 <div>
@@ -735,7 +906,17 @@ TODO
 
 ### Full Outer Join
 
-TODO
+Gegeben seien zwei Relationen $R,S$ mit $R \subseteq A_1 \times ... \times A_m \times B_1 \times ... \times B_k$ und $S \subseteq B_1 \times ... \times B_k \times C_1 \times ... \times C_n$ sowie $m,n,k \in \mathbb{N}$.
+
+Wir definieren den Full Outer Join $R \otimes S$ der beiden Relationen wie folgt:
+
+<div class="box">
+
+$R \otimes S = (R \triangleright S) \cup (R \triangleleft S)$
+
+</div>
+
+Es sind also Tupel aus $R$ **und** $S$ ohne *Join-Partner* enthalten.
 
 </div>
 <div>
@@ -750,9 +931,20 @@ TODO
 <div class="columns">
 <div>
 
-### Division
+### (Kartesische) Division
 
-TODO
+Gegeben seien zwei Relationen $R,S$ mit $R \subseteq A_1 \times ... \times A_m \times B_1 \times ... \times B_n$ und $S \subseteq B_1 \times ... \times B_n$ sowie $m,n \in \mathbb{N}$.
+
+Wir definieren die Division $R \div S$ der beiden Relationen wie folgt:
+
+<div class="box">
+
+$R \div S = \{ r_{\{A_1,...,A_m\}} : r \in R \wedge$
+$\exists s \in S : r_{\{B_1,...,B_n\}} = s\}$
+
+</div>
+
+Es sind **nur** Tupel aus $R$ mit *Join-Partner* in $S$ enthalten.
 
 </div>
 <div>
@@ -770,7 +962,8 @@ TODO
 
 So kannst du dein Verständnis noch weiter vertiefen:
 
-- TODO
+- Überführen Sie die Entity-Relationship-Modelle aus dem vorigen Abschnitt in relationale Schemas
+- Beschreiben Sie sinnvolle Abfragen auf den relationalen Schemas mittels den relationalen Operationen
 
 ---
 
