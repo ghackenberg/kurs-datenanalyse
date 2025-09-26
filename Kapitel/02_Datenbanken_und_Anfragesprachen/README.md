@@ -192,7 +192,7 @@ class Lektor : Person {
 }
 
 class Teilnehmer : Person {
-  string Materialnummer;
+  string Matrikelnummer;
 }
 ```
 
@@ -249,8 +249,8 @@ Speicherung von Daten in Form von Tabellen und Zugriff über lesende und schreib
 
 Relationale Datenbanksysteme betrachten Datensätze als Tupel einer Relation, welche wiederum eine Teilmenge des kartesischen Produktes der Attributdomänen ist: 
 
-- Domänen $D_i$ mit $n \in \mathbb{N}$ und $i \in \mathbb{N}$ entsprechen den Datentypen der Attribute einer Entität (z.B. `boolean`, `int` oder `string`)
-- Relationen $R \subseteq D_1 \times ... \times D_n = \bigtimes_{i \leq n} D_i$ mit $n \in \mathbb{N}$ entsprechen den gesammelten Datensätzen (z.B. E-Mail-Kontakte)
+- Domänen $D_i$ mit $i \in \mathbb{N}$ entsprechen den Datentypen der Attribute einer Entität (z.B. `boolean`, `int` oder `string`)
+- Relationen $R \subseteq D_1 \times ... \times D_n$ mit $n \in \mathbb{N}$ entsprechen den gesammelten Datensätzen (z.B. E-Mail-Kontakte)
 - Tupel $t = (t_1, ..., t_n) \in R$ mit $n \in \mathbb{N}$ entsprechen einzelnen Datensätzen, die in einer Relation enthalten sind (z.B. E-Mail-Kontakt `X`)
 - Variablen $t_i \in D_i$ entsprechen den Attributwerten der Tupel $(t_1, ..., t_n) \subseteq R$ mit $i \leq n$ und $i,n \in \mathbb{N}$ sowie Domänen $D_i$
 
@@ -534,7 +534,7 @@ Die Selektion $\pi_P(R)$ liefert also die Teilmenge derjenigen Tupel $t \in R$, 
 
 ### Gruppierung
 
-Gegeben sei eine Relation $R \subseteq A_1 \times ... \times A_k \times B_1 \times ... \times B_m$ mit einer Menge von Gruppierungsattributen $\Delta = \{A_1, ..., A_k\}$ und $m,k \in \mathbb{N}$.
+Gegeben sei eine Relation $R \subseteq A_1 \times ... \times A_m \times B_1 \times ... \times B_k$ mit einer Menge von Gruppierungsattributen $\Delta = \{A_1, ..., A_m\}$ und $m,k \in \mathbb{N}$.
 
 Gegeben sei des Weiteren eine Liste $F = f_1,...,f_n$ von Aggregatfunktionen $f_i: \mathcal{P}(A_1 \times ... \times A_m \times B_1 \times ... \times B_k) \rightarrow C_i$ mit Aggregatdomänen $C_i$ und $n,i \in \mathbb{N}$.
 
@@ -556,16 +556,16 @@ $\mathcal{P}(\cdot)$ repräsentiert hier eine beliebe Teilmenge von Tupeln der R
 
 $m,n,k,i \in \mathbb{N}$
 
-$R \subseteq A_1 \times ... \times A_m \times B_1 \times ... \times B_m$ (= Relation)
-$\Delta = \{A_1, ..., A_k\}$ (= Gruppierungsattribute)
+$R \subseteq A_1 \times ... \times A_m \times B_1 \times ... \times B_k$ (= Relation)
+$\Delta = \{A_1, ..., A_m\}$ (= Gruppierungsattribute)
 $F = f_1,...,f_n$ (= Aggregatfunktionen)
 
 Wir definieren die Gruppierung $\gamma_{\Delta,F}(R)$ wie folgt:
 
 <div class="box">
 
-$\gamma_{\Delta,F}(R) = \{ r_{\{B_1, ..., B_m\}} \cup (f_1(x), ..., f_n(x)) :$
-$r \in R \wedge x = \{ s \in R : s_{B_1,...,B_m} = r_{B_1,...,B_m} \} \}$
+$\gamma_{\Delta,F}(R) = \{ r_{\{A_1, ..., A_m\}} \cup (f_1(x), ..., f_n(x)) :$
+$r \in R \wedge x = \{ s \in R : s_{\{A_1,...,A_m\}} = r_{\{A_1,...,A_m\}} \} \}$
 
 </div>
 
@@ -940,11 +940,11 @@ Wir definieren die Division $R \div S$ der beiden Relationen wie folgt:
 <div class="box">
 
 $R \div S = \{ r_{\{A_1,...,A_m\}} : r \in R \wedge$
-$\exists s \in S : r_{\{B_1,...,B_n\}} = s\}$
+$\forall s \in S : r_{\{A_1,...,A_m\}} \cup s \in R \}$
 
 </div>
 
-Es sind **nur** Tupel aus $R$ mit *Join-Partner* in $S$ enthalten.
+Die Ergebnisrelation enthält **nur** Tupel, welche **alle** Tupel aus $S$ als *Join-Partner* haben.
 
 </div>
 <div>
@@ -1483,7 +1483,7 @@ Syntax:
 ```sql
 select Vorname, Nachname, Count(*) from Zuordnung, Mitarbeiter where
 
-  Mitarbeiter.ID == Zuordnung.Mitarbeiter_ID
+  Mitarbeiter.ID = Zuordnung.Mitarbeiter_ID
 
 group by Vorname, Nachname
 ```
@@ -1503,7 +1503,7 @@ Syntax:
 ```sql
 select Vorname, Nachname, Count(*) from Zuordnung, Mitarbeiter where
 
-  Mitarbeiter.ID == Zuordnung.Mitarbeiter_ID
+  Mitarbeiter.ID = Zuordnung.Mitarbeiter_ID
 
 group by Vorname, Nachname having
 
