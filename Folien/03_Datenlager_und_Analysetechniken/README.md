@@ -624,7 +624,7 @@ Im folgenden Treffen wir eine Unterscheidung zwischen zwei Arten von Systemen bz
 
 ![bg contain right](./Diagramme/Asynchrone_Synchrone_Extraktion.svg)
 
-### Extraktionszeitpunkt
+### Schritt 1: Extraktion
 
 Zunächst stellt sich die Frage, *wann* die Extraktion ausgeführt werden soll. Wir unterscheiden **zwei Prinzipien**:
 
@@ -656,13 +656,37 @@ Bei der synchronen Extraktion führen Transaktionen auf OLTP-Datenbanken zu eine
 
 ---
 
+### Schritt 2: Transformation
+
+Nach der Extraktion wird der Schritt der Transformation ausgeführt. Dabei können zwei Arten von Transformationen unterschieden werden:
+
+- **Syntaktische Transformationen** verändern nicht den Inhalt der Daten, sondern nur deren Darstellung (z.B. Datumsformat von YYYYMMDD nach ISO-8601 oder Geschlecht von `male/female` nach `0/1`)
+- **Semantische Transformation** verändern nicht nur die Darstellung der Daten, sondern auch deren Inhalt (z.B. Aggregation von Umsatzdaten oder Anreicherung mit Daten aus anderen Quellen)
+
+*Ziel ist die Erstellung **homogener Daten** für die OLAP-Systeme, um Analysen zu vereinfachen (insbesondere bei inhomogenen OLTP-Systemen).*
+
+---
+
+### Schritt 3: Laden
+
+Im letzten Schritt werden die transformierten Daten in die OLAP-Systeme geladen und den Analysten somit bereitgestellt:
+
+- Dabei kann es notwendig sein, **veraltete Daten** aus den OLAP-Systemen wieder zu **entfernen** (z.B. wenn nur die Umsätze enthalten sein sollen, die maximal 365 Tage alt sind)
+- Außerdem kann es erforderlich sein, in diesem Schritt die **Dimensionstabellen** nach den Verfahren, die breits im vorigen Abschnitt besprochen wurden (Typ 1, 2 und 3), zu **aktualisieren**
+
+*Das Laden **belastet** die **OLAP-Systeme** und kann je nach Umfang dazu führen, dass die Systeme für Analysen zeitweise **nicht** bereitstehen.*
+
+---
+
 ![bg right](../Selbststudium.png)
 
 ### Aufgaben für das **Selbststudium**
 
 So kannst du dein Verständnis noch weiter vertiefen:
 
-- TODO
+- Definieren Sie eine geeignete Strategie für die Extraktion von Daten aus der Produktion
+- Sammeln Sie Ideen für notwen-dige Transformationen auf den Daten der Produktion
+- Nennen Sie Beispiele für veraltete Daten, die beim Laden entfernt werden sollen
 
 ---
 
