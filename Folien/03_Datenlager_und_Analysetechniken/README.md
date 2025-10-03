@@ -19,28 +19,30 @@ Dieses dritte Kapitel umfasst die folgenden Abschnitte:
 
 ---
 
-## Datenbankschemata
+## Datenbank-Schemata
+
+Es gibt drei typische Datenbank-Schemata für Datenanalysesysteme:
 
 <div class="columns top">
 <div>
 
-**Sternschema**
+**1. Sternschema**
 
-![](./Diagramme/Sternschema.svg)
-
-</div>
-<div>
-
-**Schneeflockenschema**
-
-![](./Diagramme/Schneeflockenschema.svg)
+![](./Sternschema.png)
 
 </div>
 <div>
 
-**Galaxieschema**
+**2. Schneeflockenschema**
 
-![](./Diagramme/Galaxieschema.svg)
+![](./Schneeflockenschema.png)
+
+</div>
+<div>
+
+**3. Galaxieschema**
+
+![](./Galaxieschema.png)
 
 </div>
 </div>
@@ -95,7 +97,7 @@ Das Beispiel auf der rechten Seite zeigt die Umsetzung des Sternschemas für die
 
 **Tabelle *Fakt***
 
-| fk_1 | fk_2 | fk_3 | Umsatz | Menge |
+| <ins class="pfk">fk_1</ins> | <ins class="pfk">fk_2</ins> | <ins class="pfk">fk_3</ins> | Umsatz | Menge |
 |-|-|-|-|-|
 | 1 | 1 | 1 | 500€ | 5 |
 | 1 | 1 | 2 | 450€ | 3 |
@@ -111,21 +113,184 @@ Das Beispiel auf der rechten Seite zeigt die Umsetzung des Sternschemas für die
 
 **Tabelle *Produkt***
 
-| pk_1 | Name | Kategorie |
+| <ins>pk_1</ins> | Kategorie | Name |
 |-|-|-|
-| 1 | Buch A | Thriller |
+| 1 | Thriller | Buch A |
 
 **Tabelle *Ort***
 
-| pk_2 | Land | Bundesland | Stadt |
+| <ins>pk_2</ins> | Land | Bundesland | Stadt |
 |-|-|-|-|
 | 1 | AT | OÖ | Wels |
 
 **Tabelle *Zeit***
 
-| pk_3 | Jahr | Quartal | Monat | Tag |
+| <ins>pk_3</ins> | Jahr | Quartal | Monat | Tag |
 |-|-|-|-|-|
 | 1 | 2025 | 1 | 2 | 14 |
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Dimensionshierarchie
+
+Die Attribute der einzelnen Dimensionen modellieren in der Regel eine Hierarchie:
+
+- **Dimension *Produkt*** - Kategorie und Name
+- **Dimension *Ort*** - Land, Bundesland und Stadt
+- **Dimension *Zeit*** - Jahr, Quartal, Monat und Tag
+
+*Die Hierarchie ist für die Aggregation der Daten bei der Analyse wichtig!*
+
+</div>
+<div>
+
+**Allgemein**
+
+![](./Diagramme/Sternschema_Dimensionshierarchie_1.svg)
+
+**Spezifisch**
+
+![](./Diagramme/Sternschema_Dimensionshierarchie_2.svg)
+
+</div>
+</div>
+
+---
+
+### Dimensionsänderungen
+
+Wenn eine Analysedatenbank über einen langen Zeitraum betrieben wird, kann es vorkommen, dass Änderungen an den Dimensionen durchgeführt werden sollen. Ralph Kimball hat 1996 in seinem Buch mehrere Arten beschrieben, damit umzugehen:
+
+<div class="columns top">
+<div>
+
+**Typ 1 (Überschreiben)**
+
+![](./Diagramme/Slowly_Changing_Dimensions_Type_1.svg)
+
+</div>
+<div>
+
+**Typ 2 (Historisieren)**
+
+![](./Diagramme/Slowly_Changing_Dimensions_Type_2.svg)
+
+</div>
+<div>
+
+**Typ 3 (Erweitern)**
+
+![](./Diagramme/Slowly_Changing_Dimensions_Type_3.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+### Dimensionsänderungen (Typ 1)
+
+Im einfachsten Fall werden einfach die Einträge der Dimensionstabellen **überschrieben**.
+
+Im Beispiel auf der Rechten Seite wird das **Land** und der **Name** eines **Lieferanten** nachträglich geändert.
+
+**Beachte, dass dadurch ältere Fakten nachträglich einem neuen Land zugeordnet werden.**
+
+Die Neuzuordnung kann in diesem Fall durchaus ein Problem darstellen, das man vermeiden möchte.
+
+</div>
+<div>
+
+**Dimension *Lieferant***
+
+*Vorher*
+
+| <ins>PK</ins> | Land | Name |
+|-|-|-|
+| 1 | AT | Lieferant A |
+
+*Nachher*
+
+| <ins>PK</ins> | Land | Name |
+|-|-|-|
+| 1 | DE | Lieferant A' |
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+### Dimensionsänderungen (Typ 2)
+
+Um die Neuzuordnung von alten Fakten zu **vermeiden**, können die Einträge in der Dimensionstabelle **versioniert** werden.
+
+Die Versionierung kann durch eine **zusätzliche Primärschlüsselspalte** für die Versionsnummer erreicht werden.
+
+**Fakten** können (bzw. müssen) nun auf spezifische Versionen des Eintrags in der Dimensionstabelle verweisen.
+
+*$\Rightarrow$ Evtl. Probleme bei Aggregation!*
+
+</div>
+<div>
+
+**Dimension *Lieferant***
+
+*Vorher*
+
+| <ins>ID</ins> | <ins>Version</ins> | Land | Name |
+|-|-|-|-|
+| 1 | 0 | AT | Lieferant A |
+
+*Nachher*
+
+| <ins>ID</ins> | <ins>Version</ins> | Land | Name |
+|-|-|-|-|
+| 1 | 0 | AT | Lieferant A |
+| 1 | 1 | DE | Lieferant A' |
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+### Dimensionsänderungen (Typ 3)
+
+Damit die Probleme bei der Aggre-gation zu umgehen, besteht auch die Möglichkeit, die Dimensions-tabelle zu **erweitern**.
+
+Damit verweisen nun alle Fakten **auf denselben Eintrag** in der Dimen-sionstabelle, und der Eintrag bietet alle notwendigen Informationen.
+
+*Die Tabelle kann jedoch sehr schnell sehr groß und ineffizient werden!*
+
+</div>
+<div>
+
+**Dimension *Lieferant***
+
+*Vorher*
+
+| <ins>PK</ins> | Land | Name |
+|-|-|-|
+| 1 | AT | Lieferant |
+
+*Nachher*
+
+| <ins>PK</ins> | Land | LandNeu | Name | NameNeu |
+|-|-|-|-|-|
+| 1 | AT | Lieferant A | DE | Lieferant A' |
 
 </div>
 </div>

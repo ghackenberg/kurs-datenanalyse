@@ -1,13 +1,5 @@
 erDiagram
 
-    Fakt {
-        int fk_1 FK
-        int fk_2 FK
-        int fk_3 FK
-        double Umsatz
-        double Menge
-    }
-
     Dim_Produkt {
         int pk_1 PK
         string Kategorie
@@ -28,7 +20,3 @@ erDiagram
         int Monat
         int Tag
     }
-
-    Fakt }o--|| Dim_Produkt : " "
-    Fakt }o--|| Dim_Ort : " "
-    Fakt }o--|| Dim_Zeit : " "
