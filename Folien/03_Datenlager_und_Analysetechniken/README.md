@@ -297,6 +297,26 @@ Damit verweisen nun alle Fakten **auf denselben Eintrag** in der Dimen-sionstabe
 
 ---
 
+### Stern-Join
+
+Die Abfrage von Daten aus Datenbanken, die nach dem Sternschema aufgebaut sind, folgt typischerweise einem einfachen Muster:
+
+```sql
+select Dimension_1.Attribut_1_1, ..., sum(Fakt.Kennwert_1), ...
+    from Fakt
+        inner join Dimension_1 on Fakt.fk_1 = Dimension_1.pk_1
+        inner join Dimension_2 on Fakt.fk_2 = Dimension_2.pk_2
+        inner join Dimension_3 on Fakt.fk_3 = Dimension_3.pk_3
+        ...
+    where <Bedingung>
+    group by Dimension_1.Attribut_1_1, ...
+    order by Dimension_1.Attribut_1_1, ..., sum(Fakt.Kennwert_1), ...
+```
+
+Die Faktentabelle wird zunächst mit den gewünschten Dimensionstabellen **gekreuzt**, bevor Fakten **selektiert** sowie die Fakten **gruppiert** und **sortiert** werden.
+
+---
+
 <div class="columns">
 <div>
 
