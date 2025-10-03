@@ -318,13 +318,46 @@ Die Faktentabelle wird zunächst mit den gewünschten Dimensionstabellen **gekre
 ---
 
 <div class="columns">
+<div class="two">
+
+### Dimensionsredundanz
+
+Das Sternschema speichert die Werte der Attribute von Dimensionen (z.B. *Kategorie*) potenziell redundant ab:
+
+- Die redundante Speicherung benötigt grundsätzlich relativ **viel Speicherplatz**
+- Jedoch ist die redundante Speicherung bei Abfragen auch relativ **performant**
+
+*Es gibt eine Alternative zum Sternschema, das die Redundanz auflöst $\Rightarrow$ das Schneeflockenschema!*
+
+</div>
+<div>
+
+**Dimensionstabelle *Produkt***
+
+| <ins>PK</ins> | Kategorie | Name |
+|-|-|-|
+| 1 | Thriller | Buchtitel A |
+| 2 | Thriller | Buchtitel B |
+| 3 | Science Fiction | Buchtitel C |
+| 4 | Science Fiction | Buchtitel D |
+| 5 | Sachbuch | Buchtitel E |
+| 6 | Sachbuch | Buchtitel F |
+
+</div>
+</div>
+
+---
+
+<div class="columns">
 <div>
 
 ### Schneeflockenschema
 
-Eine Eigenart des Sternschemas ist, dass die **Attribute** der **Dimensionen** potenziell **redundant** abgepeichert werden:
+Beim Schneeflockenschema werden die Dimensionstabellen des Sternschemas potenziell in mehrere Tabellen zerlegt:
 
-- Name einer Kategorie ist zum Beispiel bei jedem Buch in der Dimensionstabelle *Produkt* hinterlegt
+- Die Faktentabelle bleibt grund-sätzlich bestehen
+- Die Dimensionstabellen könnten hingegen Untertabellen haben
+- Die Hierarchie der Tabellen spiegelt die Dimensionshierarchie wieder
 
 </div>
 <div >
@@ -341,11 +374,89 @@ Eine Eigenart des Sternschemas ist, dass die **Attribute** der **Dimensionen** p
 
 ### Schneeflockenschema (Beispiel)
 
+Das Beispiel auf der rechten Seite zeigt die Umsetzung in der Praxis:
+
+- Die Faktentabelle enthält wieder **Umsatz-** und **Stückzahlen**
+- Die Fakten beziehen sich jeweils auf ein **Produkt** und einen **Kalendertag**
+- Für das *Produkt* ist zusätzlich die **Kategorie** und die **Farbe** definiert
+- Der *Kalendertag* ist verweißt hingegen auf **Monat** und **Jahr**
+
 </div>
 <div>
 
+![](./Diagramme/Schneeflockenschema_Beispiel.svg)
+
 </div>
 </div>
+
+---
+
+<div class="columns">
+<div>
+
+**Dimension *Produkt***
+
+| <ins>PK_1</ins> | <ins class="fk">FK_1_1</ins> | <ins class="fk">FK_1_2</ins> | ProduktName |
+|-|-|-|-|
+| 1 | 1 | 1 | Buch A
+
+**Dimension *Kategorie***
+
+| <ins>PK_1_1</ins> | KategorieName |
+|-|-|
+| 1 | Thriller |
+
+**Dimension *Farbe***
+
+| <ins>PK_1_2</ins> | FarbeName |
+|-|-|
+| 1 | Grün |
+
+</div>
+<div>
+
+**Dimension *Tag***
+
+| <ins>PK_2</ins> | <ins class="fk">FK_2_1</ins> | TagNummer |
+|-|-|-|
+| 1 | 1 | 15 |
+
+**Dimension *Monat***
+
+| <ins>PK_2_1</ins> | <ins class="fk">FK_2_1_1</ins> | MonatNummer |
+|-|-|-|
+| 1 | 1 | 8 |
+
+**Dimension *Jahr***
+
+| <ins>PK_2_1_1</ins> | JahrNummer |
+|-|-|
+| 1 | 2025 |
+
+</div>
+</div>
+
+---
+
+### Schneeflocken-Join
+
+Auch für das Schneeflockenschema gibt es wieder ein typisches SQL-Anfragemuster, welches deutlich mehr Join-Operationen benötigt als beim Sternschema:
+
+```sql
+select Dimension_1.Attribut_1_1, ..., sum(Fakt.Kennwert_1), ...
+    from Fakt
+        inner join Dimension_1 on Fakt.fk_1 = Dimension_1.pk_1
+            inner join Dimension_1_1 on Dimension_1.fk_1_1 = Dimension_1_1.pk_1_1
+                ...
+            inner join Dimension_1_2 on Dimension_1.fk_1_2 = Dimension_1_2.pk_1_2
+                ...
+            ...
+        inner join Dimension_2 on Fakt.fk_2 = Dimension_2.pk_2
+            ...
+    where <Bedingung>
+    group by Dimension_1.Attribut_1_1, ...
+    order by Dimension_1.Attribut_1_1, ..., sum(Fakt.Kennwert_1), ...
+```
 
 ---
 

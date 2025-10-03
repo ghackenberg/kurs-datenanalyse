@@ -1,0 +1,52 @@
+erDiagram
+
+    Fakt {
+        int fk_1 FK
+        int fk_2 FK
+        double Umsatz
+        int Stückzahl
+    }
+
+    Dim_Produkt {
+        int pk_1 PK
+        int fk_1_1 FK
+        int fk_1_2 FK
+        string ProduktName UK
+    }
+
+    Dim_Kategorie {
+        int pk_1_1 PK
+        string KategorieName UK
+    }
+
+    Dim_Farbe {
+        int pk_1_2 PK
+        string FarbeName UK
+    }
+
+    Dim_Tag {
+        int pk_2 PK
+        int fk_2_1 FK
+        int TagNummer
+    }
+
+    Dim_Monat {
+        int pk_2_1 PK
+        int fk_2_1_1 FK
+        int MonatNummer
+    }
+
+    Dim_Jahr {
+        int pk_2_1_1 PK
+        int JahrNummer UK
+    }
+
+    Fakt }o--|| Dim_Produkt: " "
+    Fakt }o--|| Dim_Tag: " "
+
+    Dim_Produkt }o--|| Dim_Kategorie: " "
+    Dim_Produkt }o--|| Dim_Farbe: " "
+
+    Dim_Tag }o--|| Dim_Monat: " "
+
+    Dim_Monat }o--|| Dim_Jahr: " "
