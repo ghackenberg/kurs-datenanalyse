@@ -23,8 +23,9 @@ Hier ist schließlich die Liste der **Foliensätze** für diesen Kurs mit den je
   - Relationale Datenbanken
   - Structured Query Language
 - [Kapitel 3 - Datenlager und Analysetechniken](./Folien/03_Datenlager_und_Analysetechniken/)
-  - Stern- und Schneeflockenschema
+  - Datenlager-Schemata
   - Extract-Transform-Load
   - Online Analytical Processing
 - [Epilog](./Folien/04_Epilog/)
-  - TODO
+  - Zusammenfassung
+  - Ausblick

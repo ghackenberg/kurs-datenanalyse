@@ -597,8 +597,87 @@ So kannst du dein Verständnis noch weiter vertiefen:
 
 ---
 
+![bg right](./Extract_Transform_Load.png)
+
 ## Extract-Transform-Load
+
+Extract-Transform-Load beschreibt den Prozess für die Befüllung der Datenlager in drei Schritten:
+
+1. **Extraktion** der Orginaldaten aus den Quellsystemen
+1. **Transformation** der extrahierten Daten für das Datenlager
+1. **Laden** der transformierten Daten in das Datenlager
 
 ---
 
+![bg right](./OLTP_OLAP.png)
+
+### Begriffsdefinition
+
+Im folgenden Treffen wir eine Unterscheidung zwischen zwei Arten von Systemen bzw. Datenbanken:
+
+- **Online Transaction Processing (OLTP)** Systeme verarbeiten Transaktionen im Tagesgeschäft
+- **Online Analytical Processing (OLAP)** Systeme verarbeiten Anfragen von Datenanalysten
+
+*Technisch können dieselben Daten-banktechnologien verwendet werden!*
+
+---
+
+![bg contain right](./Diagramme/Asynchrone_Synchrone_Extraktion.svg)
+
+### Extraktionszeitpunkt
+
+Zunächst stellt sich die Frage, *wann* die Extraktion ausgeführt werden soll. Wir unterscheiden **zwei Prinzipien**:
+
+- **Asynchrone Extraktion** erfolgt unabhängig vom Zeitpunkt der Entstehung von Daten
+- **Synchrone Extraktion** erfolgt gleichzeitig mit der Entstehung der Originaldaten
+
+---
+
+### **Asynchrone** Extraktion
+
+Bei der asynchronen Extraktion können wieder drei untergeordnete Prinzipien unterschieden werden, die je nach Anwendungsfall eingesetzt werden können:
+
+- **Periodische Extraktion** überträgt die Daten aus den OLTP-Datenbanken zu definierten Zeiten in die OLAP-Datenbanken (z.B. am Wochenende)
+- **Ereignisgesteuerte Extraktion** überträgt die Daten aus den OLTP-Datenbanken zu definierten Ereignissen in die OLAP-Datenbanken (z.B. nach 100 Transaktionen)
+- **Anfragegesteuerte Extraktion** überträgt die Daten aus den OLTP-Datenbanken auf Nutzeranfrage in die OLAP-Datenbanken
+
+*Durch diese Techniken sollen **zusätzliche Lasten** auf den OLTP-Datenbanken **vermieden** werden. Jedoch arbeiten **Analysen** tendenziell mit **"veralteten" Daten**.*
+
+---
+
+![bg right](./Synchrone_Extraktion.png)
+
+### **Synchrone** Extraktion
+
+Bei der synchronen Extraktion führen Transaktionen auf OLTP-Datenbanken zu einer **sofortigen Aktualisierung** der Daten in OLAP-Datenbanken.
+
+- Der **Vorteil** ist, dass Analysen immer mit den neuesten Daten arbeiten.
+- Der **Nachteil** sind zusätzliche Lasten auf den OLTP-/OLAP-Datenbanken.
+
+---
+
+![bg right](../Selbststudium.png)
+
+### Aufgaben für das **Selbststudium**
+
+So kannst du dein Verständnis noch weiter vertiefen:
+
+- TODO
+
+---
+
+![bg right](./Online_Analytical_Processing.png)
+
 ### Online Analytical Processing
+
+TODO
+
+---
+
+![bg right](../Selbststudium.png)
+
+### Aufgaben für das **Selbststudium**
+
+So kannst du dein Verständnis noch weiter vertiefen:
+
+- TODO
