@@ -692,9 +692,120 @@ So kannst du dein Verständnis noch weiter vertiefen:
 
 ![bg right](./Online_Analytical_Processing.png)
 
-### Online Analytical Processing
+## Online Analytical Processing
 
 TODO
+
+---
+
+<div class="columns">
+<div>
+
+### OLAP Würfel
+
+TODO
+
+</div>
+<div>
+
+![](https://upload.wikimedia.org/wikipedia/de/9/99/Datacube.PNG)
+
+</div>
+</div>
+
+---
+
+### OLAP Operationen
+
+TODO
+
+<div class="columns top">
+<div>
+
+**Slice**
+
+TODO
+
+![](./OLAP_Slice.png)
+
+</div>
+<div>
+
+**Dice**
+
+TODO
+
+![](./OLAP_Dice.png)
+
+</div>
+<div>
+
+**Pivot**
+
+TODO
+
+![](./OLAP_Pivot.png)
+
+</div>
+<div>
+
+**Drill-Down**
+
+TODO
+
+![](./OLAP_Drill_Down.png)
+
+</div>
+<div>
+
+**Roll-Up**
+
+TODO
+
+![](./OLAP_Roll_Up.png)
+
+</div>
+</div>
+
+---
+
+### Operation **Slice**
+
+TODO
+
+![](https://upload.wikimedia.org/wikipedia/commons/b/b4/OLAP_Slicing.png)
+
+---
+
+### Operation **Dice**
+
+TODO
+
+![](https://upload.wikimedia.org/wikipedia/commons/7/73/OLAP_Dicing.png)
+
+---
+
+### Operation **Pivot**
+
+TODO
+
+![](https://upload.wikimedia.org/wikipedia/commons/c/c9/OLAP_Pivoting.png)
+
+---
+
+### Operation **Drill-Down**
+
+TODO
+
+![](https://upload.wikimedia.org/wikipedia/commons/2/22/OLAP_Drill-Down.png)
+
+---
+
+### Operation **Roll-Up**
+
+TODO
+
+![](https://upload.wikimedia.org/wikipedia/commons/2/22/OLAP_Drill-Down.png)
 
 ---
 
