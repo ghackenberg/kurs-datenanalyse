@@ -322,10 +322,12 @@ Die Faktentabelle wird zunächst mit den gewünschten Dimensionstabellen **gekre
 
 ### Schneeflockenschema
 
-TODO
+Eine Eigenart des Sternschemas ist, dass die **Attribute** der **Dimensionen** potenziell **redundant** abgepeichert werden:
+
+- Name einer Kategorie ist zum Beispiel bei jedem Buch in der Dimensionstabelle *Produkt* hinterlegt
 
 </div>
-<div class="two">
+<div >
 
 ![](./Diagramme/Schneeflockenschema.svg)
 
