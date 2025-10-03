@@ -1,4 +1,4 @@
-# Crash-Kurs in **Datenanalyse**
+# Kurs in **Datenanalyse**
 
 ![](./Grafiken/Social_Preview.png)
 

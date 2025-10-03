@@ -1,0 +1,35 @@
+erDiagram
+
+    Fakt {
+        int fk_1 FK
+        int fk_2 FK
+        int fk_3 FK
+        type kennwert_1
+        type kennwert_2
+        type kennwert_3
+    }
+
+    Dimension_1 {
+        int pk_1 PK
+        type attribut_1_1
+        type attribut_1_2
+        type attribut_1_3
+    }
+
+    Dimension_2 {
+        int pk_2 PK
+        type attribut_2_1
+        type attribut_2_2
+        type attribut_2_3
+    }
+    
+    Dimension_3 {
+        int pk_3 PK
+        type attribut_3_1
+        type attribut_3_2
+        type attribut_3_3
+    }
+
+    Fakt }o--|| Dimension_1 : " "
+    Fakt }o--|| Dimension_2 : " "
+    Fakt }o--|| Dimension_3 : " "

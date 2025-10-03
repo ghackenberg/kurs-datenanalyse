@@ -1,0 +1,34 @@
+erDiagram
+
+    Fakt {
+        int fk_1 FK
+        int fk_2 FK
+        int fk_3 FK
+        double Umsatz
+        double Menge
+    }
+
+    Dim_Produkt {
+        int pk_1 PK
+        string Name
+        string Kategorie
+    }
+
+    Dim_Ort {
+        int pk_2 PK
+        string Land
+        string Bundesland
+        string Stadt
+    }
+    
+    Dim_Zeit {
+        int pk_3 PK
+        int Jahr
+        int Quartal
+        int Monat
+        int Tag
+    }
+
+    Fakt }o--|| Dim_Produkt : " "
+    Fakt }o--|| Dim_Ort : " "
+    Fakt }o--|| Dim_Zeit : " "
