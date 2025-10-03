@@ -694,16 +694,27 @@ So kannst du dein Verständnis noch weiter vertiefen:
 
 ## Online Analytical Processing
 
-TODO
+OLAP beschreibt eine spezielle Methode für die Analyse von Daten in einem Datenlager und beinhaltet:
+
+- Den **OLAP Würfel** für die Darstellung der Daten
+- Die **OLAP Operationen** für die Manipulation der Daten
+
+*Im Folgenden gehen wir auf beide Konzepte detaillierter ein.*
 
 ---
 
 <div class="columns">
-<div>
+<div class="two">
 
 ### OLAP Würfel
 
-TODO
+Der OLAP Würfel stellt die Daten in einem Datenlager (entsprechend dem Stern-, Schneeflocken- oder Galaxie-Schema) als mehrdimensionalen Würfel dar:
+
+- Die **Seiten** des Würfels entsprechen den **Dimensionen** (z.B. Zeit, Kunde, Produkt)
+- Für jede Dimension ist die **Hierarchieebene** festgelegt, auf der aggregiert wird (z.B. Jahr)
+- Die **Inhalte** des Würfels entsprechen schließlich den **Fakten** (z.B. Umsatz, Stückzahl, ...)
+
+*Klassische Darstellung als 2D-Würfel auf Bildschirmen!*
 
 </div>
 <div>
@@ -717,14 +728,12 @@ TODO
 
 ### OLAP Operationen
 
-TODO
+OLAP unterscheidet eine Reihe von Basisoperationen, welche für die Manipulation der Daten in einem OLAP-Würfel verwendet werden können:
 
 <div class="columns top">
 <div>
 
 **Slice**
-
-TODO
 
 ![](./OLAP_Slice.png)
 
@@ -733,16 +742,12 @@ TODO
 
 **Dice**
 
-TODO
-
 ![](./OLAP_Dice.png)
 
 </div>
 <div>
 
 **Pivot**
-
-TODO
 
 ![](./OLAP_Pivot.png)
 
@@ -751,8 +756,6 @@ TODO
 
 **Drill-Down**
 
-TODO
-
 ![](./OLAP_Drill_Down.png)
 
 </div>
@@ -760,18 +763,18 @@ TODO
 
 **Roll-Up**
 
-TODO
-
 ![](./OLAP_Roll_Up.png)
 
 </div>
 </div>
 
+*Als Analyst arbeitet man sich mithilfe dieser Operationen schnell und ohne SQL-Kenntnisse durch den Datenbestand.*
+
 ---
 
 ### Operation **Slice**
 
-TODO
+Die Operation *Slice* **entfernt alle Fakten**, die in einer Dimension (z.B. den *Vertriebskanal*) **nicht** einem speziellen Wert zugeordnet sind (z.B. *Partner*):
 
 ![](https://upload.wikimedia.org/wikipedia/commons/b/b4/OLAP_Slicing.png)
 
@@ -779,7 +782,7 @@ TODO
 
 ### Operation **Dice**
 
-TODO
+Die Operation *Dice* **entfernt alle Fakten**, die in einer Dimension (z.B. *Produkt*) einem speziellen Wert zugeordnet sind (z.B. *Computer & Laptops*):
 
 ![](https://upload.wikimedia.org/wikipedia/commons/7/73/OLAP_Dicing.png)
 
@@ -787,7 +790,7 @@ TODO
 
 ### Operation **Pivot**
 
-TODO
+Die Operation *Pivot* **tauscht die Achsen** des Würfels (z.B. *Produkt* und *Vertriebskanal*) des Würfels in der Darstellung auf dem Bildschirm:
 
 ![](https://upload.wikimedia.org/wikipedia/commons/c/c9/OLAP_Pivoting.png)
 
@@ -795,7 +798,7 @@ TODO
 
 ### Operation **Drill-Down**
 
-TODO
+Die Operation *Drill-Down* entspricht der Operation *Slice* (z.B. *Konsolen*) gefolgt von einer Entnestung der Fakten durch eintauchen in die Slice-Dimension (z.B. *Produkt*).
 
 ![](https://upload.wikimedia.org/wikipedia/commons/2/22/OLAP_Drill-Down.png)
 
@@ -803,7 +806,7 @@ TODO
 
 ### Operation **Roll-Up**
 
-TODO
+Die Operation *Roll-Up* entspricht dem Gegenteil der Operation *Drill-Down* und beinhaltet eine Aggregation der Fakten durch heraustauchen aus der Slice-Dimension.
 
 ![](https://upload.wikimedia.org/wikipedia/commons/2/22/OLAP_Drill-Down.png)
 
@@ -815,4 +818,5 @@ TODO
 
 So kannst du dein Verständnis noch weiter vertiefen:
 
-- TODO
+- Zeichnen Sie einen OLAP-Würfel für das Datenlager-Schema eines produzierenden Betriebs
+- Wenden Sie die Operation Drill-Down für einen ausgewählten Wert einer beliebigen Dimension an und zeichnen Sie den Würfel erneut
