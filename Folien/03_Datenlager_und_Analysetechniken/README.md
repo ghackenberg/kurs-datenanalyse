@@ -438,6 +438,31 @@ Das Beispiel auf der rechten Seite zeigt die Umsetzung in der Praxis:
 
 ---
 
+![bg right:40%](./Dimensionshierarchie.png)
+
+### Dimensionshierarchie
+
+Wie erwähnt, wird die Hierarchie der Dimen-sionen durch die Tabellenstuktur abgebildet:
+
+- **Fakten** sind direkt mit der untersten Ebene der Hierarchie verbunden
+- Jede **Ebene** der Hierarchie kann weitere Überebenen definieren und verweisen
+- Mehrere **Überebenen** führen zu einer unabhängigen Verzweigung
+- Die **obersten Ebenen** definieren die maximale Aggregationsstufe
+
+---
+
+![bg contain right](./Kimball.png)
+
+### Dimensionsänderungen
+
+Das **Problem** der Änderungen an den Einträgen der Dimensionstabellen bleibt grundsätzlich bestehen.
+
+Genauso können die bereits eingeführten **Lösungsansätze** (Typ 1, 2 und 3) angewendet werden.
+
+Änderungen beziehen sich dabei auf die entsprechenden **Ebenen** der Hierarchie (z.B. *Kategorie*).
+
+---
+
 ### Schneeflocken-Join
 
 Auch für das Schneeflockenschema gibt es wieder ein typisches SQL-Anfragemuster, welches deutlich mehr Join-Operationen benötigt als beim Sternschema:
