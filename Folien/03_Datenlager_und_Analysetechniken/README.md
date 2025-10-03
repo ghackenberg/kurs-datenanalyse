@@ -585,6 +585,18 @@ select Dimension_1.Attribut_1_1, ..., sum(Fakt_1.Kennzahl_1_1), ...
 
 ---
 
+![bg right](../Selbststudium.png)
+
+### Aufgaben für das **Selbststudium**
+
+So kannst du dein Verständnis noch weiter vertiefen:
+
+- Entwickeln Sie ein Stern-Schema für die Analyse der Daten eines produzierenden Betriebs
+- Überführen Sie das Stern-Schema in ein Schneeflocken- und ein Galaxie-Schema
+- Formulieren Sie SQL-Anfragen für die unterschiedlichen Varianten des Schemas
+
+---
+
 ## Extract-Transform-Load
 
 ---
