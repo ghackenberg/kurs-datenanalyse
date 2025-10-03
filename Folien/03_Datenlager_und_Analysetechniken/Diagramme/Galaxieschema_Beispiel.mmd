@@ -1,0 +1,54 @@
+erDiagram
+
+    Fakt_Vertrieb {
+        int fk_1 FK
+        int fk_2 FK
+        double Umsatz
+        int Stückzahl
+    }
+
+    Fakt_Lagerung {
+        int fk_2 FK
+        int fk_3 FK
+        int Stückzahl
+    }
+
+    Dim_Kunde {
+        int pk_1 PK
+        int fk_1_1 FK
+        string KundeName
+    }
+
+    Dim_Land {
+        int pk_1_1 PK
+        string LandName
+        string LandKürzel
+    }
+
+    Dim_Produkt {
+        int pk_2 PK
+        int fk_2_1 FK
+        string ProduktName
+    }
+
+    Dim_Kategorie {
+        int pk_2_1 PK
+        string KategorieName
+    }
+
+    Dim_Lager {
+        int pk_3 PK
+        string LagerName
+    }
+
+    Fakt_Vertrieb }o--|| Dim_Kunde: " "
+
+    Fakt_Vertrieb }o--|| Dim_Produkt: " "
+
+    Fakt_Lagerung }o--|| Dim_Produkt: " "
+
+    Dim_Produkt }o--|| Dim_Kategorie: " "
+
+    Fakt_Lagerung }o--|| Dim_Lager: " "
+
+    Dim_Kunde }o--|| Dim_Land: " "

@@ -1,3 +1,66 @@
 erDiagram
 
-    
+    Fakt_1 {
+        int fk_1 FK
+        int fk_2 FK
+        type kennwert_1_1
+        type kennwert_1_2
+    }
+
+    Fakt_2 {
+        int fk_2 FK
+        int fk_3 FK
+        type kennwert_2_1
+        type kennwert_2_2
+    }
+
+    Dimension_1 {
+        int pk_1 PK
+        int fk_1_1 FK
+        type attribut_1_1
+        type attribut_1_2
+    }
+
+    Dimension_2 {
+        int pk_2 PK
+        int fk_2_1 FK
+        type attribut_2_1
+        type attribut_2_2
+    }
+
+    Dimension_3 {
+        int pk_3 PK
+        int fk_3_1 FK
+        type attribut_3_1
+        type attribut_3_2
+    }
+
+    Dimension_1_1 {
+        int pk_1_1 PK
+        type attribut_1_1_1
+        type attribut_1_1_2
+    }
+
+    Dimension_2_1 {
+        int pk_2_1 PK
+        type attribut_2_1_1
+        type attribut_2_1_2
+    }
+
+    Dimension_3_1 {
+        int pk_3_1 PK
+        type attribut_3_1_1
+        type attribut_3_1_2
+    }
+
+    Fakt_1 }o--|| Dimension_1: " "
+    Fakt_1 }o--|| Dimension_2: " "
+
+    Fakt_2 }o--|| Dimension_2: " "
+    Fakt_2 }o--|| Dimension_3: " "
+
+    Dimension_1 }o--|| Dimension_1_1: " "
+
+    Dimension_2 }o--|| Dimension_2_1: " "
+
+    Dimension_3 }o--|| Dimension_3_1: " "

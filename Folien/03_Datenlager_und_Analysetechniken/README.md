@@ -13,34 +13,34 @@ math: mathjax
 
 Dieses dritte Kapitel umfasst die folgenden Abschnitte:
 
-1. Datenbank-Schemata
+1. Datenlager-Schemata
 1. Extract-Transform-Load
 1. Online Analytical Processing
 
 ---
 
-## Datenbank-Schemata
+## Datenlager-Schemata
 
-Es gibt drei typische Datenbank-Schemata für Datenanalysesysteme:
+Es gibt drei typische Datenbank-Schemata für Datenlager bzw. -analysesysteme:
 
 <div class="columns top">
 <div>
 
-**1. Sternschema**
+**1. Stern-Schema**
 
 ![](./Sternschema.png)
 
 </div>
 <div>
 
-**2. Schneeflockenschema**
+**2. Schneeflocken-Schema**
 
 ![](./Schneeflockenschema.png)
 
 </div>
 <div>
 
-**3. Galaxieschema**
+**3. Galaxie-Schema**
 
 ![](./Galaxieschema.png)
 
@@ -52,9 +52,9 @@ Es gibt drei typische Datenbank-Schemata für Datenanalysesysteme:
 <div class="columns">
 <div>
 
-### Sternschema
+### Stern-Schema
 
-Das Sternschema ist wie folgt definiert:
+Das Stern-Schema ist wie folgt definiert:
 
 - Mehrere **Dimensionstabellen** für die Dimensionenen, nach denen die Daten analysiert werden sollen
 - Eine zentrale **Faktetabelle** mit den eigentlichen Kennwerten, die analysiert werden sollen
@@ -73,9 +73,9 @@ Das Sternschema ist wie folgt definiert:
 <div class="columns">
 <div>
 
-### Sternschema (Beispiel)
+### Stern-Schema (Beispiel)
 
-Das Beispiel auf der rechten Seite zeigt die Umsetzung des Sternschemas für die Analyse von Vertriebsdaten:
+Das Beispiel auf der rechten Seite zeigt die Umsetzung des Stern-Schemas für die Analyse von Vertriebsdaten:
 
 - Dimensionen sind verkauften **Produkte**, **Ort** des Umsatzes, und **Zeitpunkt**
 - Fakten sind die verkaufte **Menge** und der erzielte **Umsatz** pro Produkt, Ort und Zeitpunkt
@@ -299,7 +299,7 @@ Damit verweisen nun alle Fakten **auf denselben Eintrag** in der Dimen-sionstabe
 
 ### Stern-Join
 
-Die Abfrage von Daten aus Datenbanken, die nach dem Sternschema aufgebaut sind, folgt typischerweise einem einfachen Muster:
+Die Abfrage von Daten aus Datenbanken, die nach dem Stern-Schema aufgebaut sind, folgt typischerweise einem einfachen Muster:
 
 ```sql
 select Dimension_1.Attribut_1_1, ..., sum(Fakt.Kennwert_1), ...
@@ -320,14 +320,14 @@ Die Faktentabelle wird zunächst mit den gewünschten Dimensionstabellen **gekre
 <div class="columns">
 <div class="two">
 
-### Dimensionsredundanz
+### Datenredundanz
 
-Das Sternschema speichert die Werte der Attribute von Dimensionen (z.B. *Kategorie*) potenziell redundant ab:
+Das Stern-Schema speichert die Werte der Attribute von Dimensionen (z.B. *Kategorie*) potenziell redundant ab:
 
 - Die redundante Speicherung benötigt grundsätzlich relativ **viel Speicherplatz**
 - Jedoch ist die redundante Speicherung bei Abfragen auch relativ **performant**
 
-*Es gibt eine Alternative zum Sternschema, das die Redundanz auflöst $\Rightarrow$ das Schneeflockenschema!*
+*Es gibt eine Alternative zum Stern-Schema, das die Redundanz auflöst $\Rightarrow$ das Schneeflocken-Schema!*
 
 </div>
 <div>
@@ -351,9 +351,9 @@ Das Sternschema speichert die Werte der Attribute von Dimensionen (z.B. *Kategor
 <div class="columns">
 <div>
 
-### Schneeflockenschema
+### Schneeflocken-Schema
 
-Beim Schneeflockenschema werden die Dimensionstabellen des Sternschemas potenziell in mehrere Tabellen zerlegt:
+Beim Schneeflocken-Schema werden die Dimensionstabellen des Stern-Schemas potenziell in mehrere Tabellen zerlegt:
 
 - Die Faktentabelle bleibt grund-sätzlich bestehen
 - Die Dimensionstabellen könnten hingegen Untertabellen haben
@@ -372,7 +372,7 @@ Beim Schneeflockenschema werden die Dimensionstabellen des Sternschemas potenzie
 <div class="columns">
 <div>
 
-### Schneeflockenschema (Beispiel)
+### Schneeflocken-Schema (Beispiel)
 
 Das Beispiel auf der rechten Seite zeigt die Umsetzung in der Praxis:
 
@@ -465,7 +465,7 @@ Genauso können die bereits eingeführten **Lösungsansätze** (Typ 1, 2 und 3) 
 
 ### Schneeflocken-Join
 
-Auch für das Schneeflockenschema gibt es wieder ein typisches SQL-Anfragemuster, welches deutlich mehr Join-Operationen benötigt als beim Sternschema:
+Auch für das Schneeflocken-Schema gibt es wieder ein typisches SQL-Anfragemuster, welches deutlich mehr Join-Operationen benötigt als beim Stern-Schema:
 
 ```sql
 select Dimension_1.Attribut_1_1, ..., sum(Fakt.Kennwert_1), ...
@@ -485,15 +485,31 @@ select Dimension_1.Attribut_1_1, ..., sum(Fakt.Kennwert_1), ...
 
 ---
 
+![bg contain right:40%](./Fakteneinschränkung.png)
+
+### Fakteneinschränkung
+
+Schließlich besteht beim Stern- und beim Schneeflocken-Schema noch das Problem, dass **alle Fakten mit allen Dimensionen** verknüpft werden müssen.
+
+Es gibt jedoch Situationen, in denen man **mehrere heterogene Fakten** gleichzeitig analysieren will, die sich vielleicht nur in wenigen Dimensionen überschneiden.
+
+*Für diese komplexeren Anwendungsfälle gibt es ein weiteres Schema $\Rightarrow$ das Galaxie-Schema.*
+
+---
+
 <div class="columns">
 <div>
 
-### Galaxieschema
+### Galaxie-Schema
 
-TODO
+Das Galaxie-Schema zeichnet sich durch **mehrere Faktentabellen** aus.
+
+Faktentabellen haben **eigene** und **geteilte Dimensionstabellen**.
+
+Dimensionstabellen können schließlich **hierarchisch** aufgebaut sein.
 
 </div>
-<div>
+<div class="two">
 
 ![](./Diagramme/Galaxieschema.svg)
 
@@ -505,13 +521,67 @@ TODO
 <div class="columns">
 <div>
 
-### Galaxieschema (Beispiel)
+### Galaxie-Schema (Beispiel)
+
+Das Beispiel auf der rechten Seite zeigt die Abbildung von Vertriebs- und Lager-ungsdaten in einem Schema:
+
+- Die **Vertriebsdaten** umfassen Um-sätze und Stückzahlen kategorisiert nach Kunde und Produkt
+- Die **Lagerungsdaten** umfassen Stückzahlen kategorisiert nach Produkt und Lager
+
+*$\Rightarrow$ Aggregation der Fakten möglich!*
 
 </div>
 <div>
 
+![](./Diagramme/Galaxieschema_Beispiel.svg)
+
 </div>
 </div>
+
+---
+
+![bg right](./Dimensionshierarchie.png)
+
+### Dimensionshierarchie
+
+In einem Galaxie-Schema kann die hierarchische Struktur von Dimen-sionen wie beim Stern-Schema abgebildet werden.
+
+Genauso kann die hierarchische Struktur der Dimensionen wie beim Schneeflocken-Schema abgebildet werden.
+
+*Somit erhält man die gleich Vor- und Nachteile bzgl. Datenredundanz!*
+
+---
+
+![bg contain right](./Kimball.png)
+
+### Dimensionsänderungen
+
+Selbes gilt für die Abbildung von Änderungen an den Einträgen der Dimensionstabellen.
+
+Die Abbildung kann wieder nach Typ 1 (überschreiben), Typ 2 (historisier-en) oder Typ 3 (erweitern) erfolgen.
+
+Daraus ergeben sich dieselben Vor- und Nachteile, wie bereits vorher besprochen.
+
+---
+
+### Galaxie-Join
+
+Schließlich kann auch für einen Galaxie-Join wieder ein typisches Muster indentifiziert werden, das wie folgt aussieht:
+
+```sql
+select Dimension_1.Attribut_1_1, ..., sum(Fakt_1.Kennzahl_1_1), ...
+    from Fakt_1, Fakt_2, ...
+        inner join Dimension_1 on (Fakt_1.fk_1 = Dimension_1.pk_1 and Fakt_2.fk_1 = Dimension_1.pk_1)
+            inner join Dimension_1_1 on Dimension_1.fk_1_1 = Dimension_1_1.pk_1_1
+                ...
+            ...
+        ...
+    where <Bedingung>
+    group by Dimension_1.Attribut_1_1, ...
+    order by Dimension_1.Attribut_1_1, ..., sum(Fakt_1.Kennzahl_1_1)
+```
+
+*Beachte, dass der Join das kartesische Produkte mehrere Faktentabellen enthält, deren Kennwerte dann gemeinsam aggregiert werden können.*
 
 ---
 
