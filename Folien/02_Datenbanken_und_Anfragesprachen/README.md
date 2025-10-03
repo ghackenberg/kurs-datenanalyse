@@ -448,7 +448,7 @@ Zusätzliche *Relation* mit *Domänen* für Fremdschlüssel, die einen zusammeng
 
 Für die Auswertung der Daten gibt es folgende Operationen:
 
-- **Unäre Operationen**: Projektion, Selektion und Gruppierung
+- **Unäre Operationen**: Projektion, Selektion, Nestung, Entnestung, Gruppierung
 - **Binäre Operationen**: Vereinigung, Schnittmenge, Differenz, Kartesisches Produkt, Join, Equi-Join, Natural Join, Left/Right/Full Outer Join, Division
 
 ---
@@ -460,21 +460,35 @@ Unäre Operatonen arbeiten auf einer Relation $R \subseteq D_1 \times ... \times
 <div class="columns top">
 <div>
 
-**1. Projektion $\pi_\Delta(R)$**
+**Projektion $\pi_\Delta(R)$**
 
 ![](https://upload.wikimedia.org/wikipedia/commons/3/31/Relational_Algebra_Single_Table_Projection.svg)
 
 </div>
 <div>
 
-**2. Selektion $\sigma_P(R)$**
+**Selektion $\sigma_P(R)$**
 
 ![](https://upload.wikimedia.org/wikipedia/commons/2/28/Relational_Algebra_Single_Table_Selection.svg)
 
 </div>
 <div>
 
-**3. Gruppierung $\gamma_{\Delta,F}(R)$**
+**Nestung $\nu_\Delta(R)$**
+
+![](https://upload.wikimedia.org/wikipedia/commons/4/46/Relational_Algebra_Aggregation_Nesting.svg)
+
+</div>
+<div>
+
+**Entnestung $\epsilon_C(R)$**
+
+![](https://upload.wikimedia.org/wikipedia/commons/e/e3/Relational_Algebra_Aggregation_Unnesting.svg)
+
+</div>
+<div>
+
+**Gruppierung $\gamma_{\Delta,F}(R)$**
 
 ![](https://upload.wikimedia.org/wikipedia/commons/8/84/Relational_Algebra_Aggregation.svg)
 
@@ -490,7 +504,11 @@ Unäre Operatonen arbeiten auf einer Relation $R \subseteq D_1 \times ... \times
 
 Gegeben sei eine Relation $R \subseteq D_1 \times ... \times D_n$ sowie eine Teilmenge $\Delta \subseteq \{D_1, ..., D_n\}$ mit $n \in \mathbb{N}$. Wir definieren die Projektion $\pi_\Delta(R)$ wie folgt:
 
+<div class="box">
+
 $\pi_\Delta(R) = \{ t_\Delta : t \in R \}$
+
+</div>
 
 Hierbei repräsentiert $t$ die Tupel der ursprünglichen Relation $R$ über $\{ D_1, ..., D_n \}$, während $t_\Delta$ das zugehörige Tupel über der Teilmenge $\Delta$ beschreibt.
 
@@ -523,6 +541,61 @@ Die Selektion $\pi_P(R)$ liefert also die Teilmenge derjenigen Tupel $t \in R$, 
 <div>
 
 ![](https://upload.wikimedia.org/wikipedia/commons/2/28/Relational_Algebra_Single_Table_Selection.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="three">
+
+### Nestung
+
+Gegeben sei eine Relation $R \subseteq A_1 \times ... \times A_m \times B_1 \times ... \times B_n$ mit einer Menge von Nestungsattributen $\Delta = \{A_1, ..., A_m\}$ und $m,n \in \mathbb{N}$.
+
+Wir definieren die Nestung $\nu_\Delta(R)$ wie folgt:
+
+<div class="box">
+
+$\nu_\Delta(R) = \{r_{\{B_1,...,B_m\}} \cup (x) : r \in R \wedge$
+$x =\{r_\Delta': r' \in R \wedge r_\Delta = r_\Delta'\}\}$
+
+</div>
+
+Das Ergebnis der Nestung $\nu_\Delta(R)$ ist somit eine Relation $R'  \subseteq A_1 \times ... \times A_m \times C$ mit neuer Nestungsdomäne $C = B_1 \times ... \times B_n$.
+
+</div>
+<div class="two">
+
+![](https://upload.wikimedia.org/wikipedia/commons/4/46/Relational_Algebra_Aggregation_Nesting.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="three">
+
+### Entnestung
+
+Gegeben sei in diesem Fall eine Relation $R \subseteq A_1 \times ... \times A_m \times C$ mit Nestungsdomäne $C = B_1 \times ... \times B_n$ und $m,n \in \mathbb{N}$.
+
+Wir definieren die Entnestung $\epsilon_C(R)$ wie folgt:
+
+<div class="box">
+
+$\epsilon_C(R) = \{r_{\{A_1,...,A_m\}} \cup c : r \in R \wedge c \in r_{\{C\}}\}$
+
+</div>
+
+Das Ergebnis der Entnestung $\epsilon_C(R)$ ist eine Relation $R' \subseteq A_1 \times ... \times A_m \times B_1 \times ... \times B_n$, welches die Tupel aus der Nestungsdomäne $C$ wieder entpackt.
+
+</div>
+<div class="two">
+
+![](https://upload.wikimedia.org/wikipedia/commons/e/e3/Relational_Algebra_Aggregation_Unnesting.svg)
 
 </div>
 </div>

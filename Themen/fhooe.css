@@ -70,8 +70,12 @@ ins.pfk {
 }
 
 div.box {
-    border: 1px solid black;
+    border: 0.125rem solid black;
+    border-radius: 0.5rem;
+
+    background: #eee;
     
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
+    padding-top: 0.25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
