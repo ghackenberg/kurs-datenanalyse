@@ -8,6 +8,6 @@
         ]
     },
     "markdown.marp.themes": [
-        "./Theme/fhooe.css"
+        "./Themen/fhooe.css"
     ]
 }
