@@ -704,25 +704,130 @@ OLAP beschreibt eine spezielle Methode für die Analyse von Daten in einem Daten
 ---
 
 <div class="columns">
-<div class="two">
+<div>
 
 ### OLAP Würfel
 
-Der OLAP Würfel stellt die Daten in einem Datenlager (entsprechend dem Stern-, Schneeflocken- oder Galaxie-Schema) als mehrdimensionalen Würfel dar:
+Darstellung der Daten als Würfel:
 
 - Die **Seiten** des Würfels entsprechen den **Dimensionen** (z.B. Zeit, Kunde, Produkt)
 - Für jede Dimension ist die **Hierarchieebene** festgelegt, auf der aggregiert wird (z.B. Jahr)
-- Die **Inhalte** des Würfels entsprechen schließlich den **Fakten** (z.B. Umsatz, Stückzahl, ...)
-
-*Klassische Darstellung als 2D-Würfel auf Bildschirmen!*
+- Die **Inhalte** des Würfels entsprechen der Aggregation der **Fakten** (z.B. Summe des Umsatzes, ...)
 
 </div>
 <div>
 
-![](https://upload.wikimedia.org/wikipedia/de/9/99/Datacube.PNG)
+![width:900](./Diagramme/OLAP_Würfel.svg)
 
 </div>
 </div>
+
+---
+
+<div class="columns">
+<div>
+
+### OLAP Würfel Beispiel (Dimensionen)
+
+Zur Verdeutlichung hier ein Beispiel:
+
+- Die **erste Dimension** entspricht der *Zeit* und ist aufgelöst nach *Jahren* (z.B. *2025*)
+- Die **zweite Dimension** entspricht dem *Produkt* und ist aufgelöst nach *Kategorien* (z.B. *Maschinen*)
+- Die **dritte Dimension** entspricht dem *Kunden* und ist aufgelöst nach *Ländern* (z.B. *AT*)
+
+</div>
+<div>
+
+![width:900](./Diagramme/OLAP_Würfel_Beispiel_Dimensionen.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### OLAP Würfel Beispiel (Fakten)
+
+Und nun zu den Inhalten des Würfels:
+
+- Die Inhalte könnten aggregierte **Umsatzzahlen** für die jeweiligen Gruppen sein (z.B. `SUM(...)`)
+- Die Gruppe ergibt sich aus den **Attributwerten** der gewählten **Dimensionsebenen**, z.B.:
+  - $(2023, Maschinen, AT)$
+  - $(2024, Anlagen, DE)$
+  - $(2025, Service, CH)$
+
+</div>
+<div>
+
+![width:900](./Diagramme/OLAP_Würfel_Beispiel_Fakten.svg)
+
+</div>
+</div>
+
+---
+
+### OLAP Würfel SQL-Abfrage
+
+Und so sieht das Muster für die zugehörige SQL-Abfrage aus, welche Daten aus einer Datenbank ausliest, die nach dem Stern-Schema aufgebaut ist:
+
+```sql
+select Dimension_1.Attribut_1_1, Dimension_2.Attribut_2_1, ..., sum(Fakt.Kennwert_1)
+    from Fakt
+        inner join Dimension_1 on Fakt.fk_1 = Dimension_1.pk_1
+        inner join Dimension_2 on Fakt.fk_2 = Dimension_2.pk_2
+        ...
+    group by Dimension_1.Attribut_1_1, Dimension_2.Attribut_2_1, ...
+    order by Dimension_1.Attribut_1_1, Dimension_2.Attribut_2_1, ...
+```
+
+*Beachte, dass eine SQL-Abfrage prinzipiell die Daten für einen Würfel mit beliebig vielen Dimensionen liefern kann.*
+
+---
+
+<div class="columns">
+<div>
+
+### OLAP Würfel SQL-Ergebnis
+
+Und so sieht die allgemeine Form des Ergebnisses der SQL-Abfrage aus:
+
+- Das Ergebnis ist wie zu erwarten eine Menge von Tupeln
+- Die Tupel entsprechen den Kombi-nationen der Attributwerte $aw_x$ für die Dimensionen und deren Ebenen
+- Für jedes dieser Tupel wird des Weiteren die Aggregationsfunktion $F$ berechnet
+
+</div>
+<div>
+
+| $D_1.A_{1.1}$ | ... | $D_n.A_{n.1}$ | $F(\cdot)$ |
+|-|-|-|-|
+| $aw_{1.1.1}$ | ... | $aw_{n.1.1}$ | $F(1, ..., 1)$ |
+| ... | ... | ... | ... |
+| $aw_{1.1.1}$ | ... | $aw_{n.1.m}$ | $F(1, ..., m)$ |
+| ... | ... | ... | ... |
+| $aw_{1.1.k}$ | ... | $aw_{n.1.1}$ | $F(k, ..., 1)$ |
+| ... | ... | ... | ... |
+| $aw_{1.1.k}$ | ... | $aw_{n.1.m}$ | $F(k, ..., m)$ |
+
+</div>
+</div>
+
+---
+
+### OLAP Würfel SQL-Ergebnis (Beispiel)
+
+Auf unser voriges Beispiel angewendet sieht die Ergebnisrelation somit wie folgt aus:
+
+| <ins>Zeit.Jahr</ins> | <ins>Produkt.Kategorie</ins> | <ins>Kunde.Land</ins> | $F(\cdot)$ |
+|-|-|-|-|
+| 2023 | Maschinen | AT | $F(2023, Maschinen, AT) = 1000k$ |
+| 2023 | Maschinen | DE | $F(2023, Maschinen, DE) = 2000k$ |
+| 2023 | Maschinen | CH | $F(2023, Maschinen, CH) = 500k$ |
+| ... | ... | ... | ... |
+| 2025 | Service | AT | $F(2025, Service, AT) = 600k$ |
+| 2025 | Service | DE | $F(2025, Service, DE) = 3100k$ |
+| 2025 | Service | CH | $F(2025, Service, CH) = 500k$ |
 
 ---
 
@@ -735,35 +840,28 @@ OLAP unterscheidet eine Reihe von Basisoperationen, welche für die Manipulation
 
 **Slice**
 
-![](./OLAP_Slice.png)
+![](./Diagramme/OLAP_Slice.svg)
 
 </div>
 <div>
 
 **Dice**
 
-![](./OLAP_Dice.png)
+![](./Diagramme/OLAP_Dice.svg)
 
 </div>
 <div>
 
 **Pivot**
 
-![](./OLAP_Pivot.png)
+![](./Diagramme/OLAP_Pivot.svg)
 
 </div>
 <div>
 
 **Drill-Down**
 
-![](./OLAP_Drill_Down.png)
-
-</div>
-<div>
-
-**Roll-Up**
-
-![](./OLAP_Roll_Up.png)
+![](./Diagramme/OLAP_Drill.svg)
 
 </div>
 </div>
@@ -780,11 +878,49 @@ Die Operation *Slice* **entfernt alle Fakten**, die in einer Dimension (z.B. den
 
 ---
 
+### Operation **Slice** (SQL-Abfrage)
+
+Und so sieht das Muster einer SQL-Abfrage aus, welche die Operation *Slice* auf einen Stern-Schema durchführt:
+
+```sql
+select Dimension_1.Attribut_1_1, Dimension_2.Attribut_2_1, Dimension_2.Attribut_3_1, sum(Fakt.Kennwert_1)
+    from Fakt
+        inner join Dimension_1 on Fakt.fk_1 = Dimension_1.pk_1
+        inner join Dimension_2 on Fakt.fk_2 = Dimension_2.pk_2
+        inner join Dimension_3 on Fakt.fk_3 = Dimension_3.pk_3
+    where Dimension_3.Attribute_3_1 = <Wert>
+    group by Dimension_1.Attribut_1_1, Dimension_2.Attribut_2_1, Dimension_2.Attribut_3_1
+    order by Dimension_1.Attribut_1_1, Dimension_2.Attribut_2_1, Dimension_2.Attribut_3_1
+```
+
+*Beachte die **Selektionsbedingung**, die gegenüber der ursprünglichen SQL-Abfrage für den OLAP Würfel **hinzugefügt** wurde.*
+
+---
+
 ### Operation **Dice**
 
 Die Operation *Dice* **entfernt alle Fakten**, die in einer Dimension (z.B. *Produkt*) einem speziellen Wert zugeordnet sind (z.B. *Computer & Laptops*):
 
 ![](https://upload.wikimedia.org/wikipedia/commons/7/73/OLAP_Dicing.png)
+
+---
+
+### Operation **Dice** (SQL-Abfrage)
+
+Und so sieht wieder das Muster einer SQL-Abfrage aus, welche die Operation *Dice* auf einem Stern-Schema durchführt:
+
+```sql
+select Dimension_1.Attribut_1_1, Dimension_2.Attribut_2_1, Dimension_2.Attribut_3_1, sum(Fakt.Kennwert_1)
+    from Fakt
+        inner join Dimension_1 on Fakt.fk_1 = Dimension_1.pk_1
+        inner join Dimension_2 on Fakt.fk_2 = Dimension_2.pk_2
+        inner join Dimension_3 on Fakt.fk_3 = Dimension_3.pk_3
+    where Dimension_3.Attribute_2_1 != <Wert>
+    group by Dimension_1.Attribut_1_1, Dimension_2.Attribut_2_1, Dimension_2.Attribut_3_1
+    order by Dimension_1.Attribut_1_1, Dimension_2.Attribut_2_1, Dimension_2.Attribut_3_1
+```
+
+*Beachte die **leicht veränderte Selektionsbedingung** gegenüber die Variante für die Operation Slice!*
 
 ---
 
@@ -796,6 +932,24 @@ Die Operation *Pivot* **tauscht die Achsen** des Würfels (z.B. *Produkt* und *V
 
 ---
 
+### Operation **Pivot** (SQL-Abfrage)
+
+Auch für die Operation *Pivot* kann ein Muster für die SQL-Abfrage definiert werden, welches auf dem Stern-Schema operiert:
+
+```sql
+select Dimension_3.Attribut_3_1, Dimension_2.Attribut_2_1, Dimension_1.Attribut_1_1, sum(Fakt.Kennwert_1)
+    from Fakt
+        inner join Dimension_3 on Fakt.fk_3 = Dimension_3.pk_3
+        inner join Dimension_2 on Fakt.fk_2 = Dimension_2.pk_2
+        inner join Dimension_1 on Fakt.fk_1 = Dimension_1.pk_1
+    group by Dimension_3.Attribut_3_1, Dimension_2.Attribut_2_1, Dimension_1.Attribut_1_1
+    order by Dimension_3.Attribut_3_1, Dimension_2.Attribut_2_1, Dimension_1.Attribut_1_1
+```
+
+*Achte auf die **veränderte Reihenfolge der Dimensionen** sowohl bei der **Projektion** als auch beim **Join**, der **Gruppierung**, und der **Sortierung**!*
+
+---
+
 ### Operation **Drill-Down**
 
 Die Operation *Drill-Down* entspricht der Operation *Slice* (z.B. *Konsolen*) gefolgt von einer Entnestung der Fakten durch eintauchen in die Slice-Dimension (z.B. *Produkt*).
@@ -804,11 +958,22 @@ Die Operation *Drill-Down* entspricht der Operation *Slice* (z.B. *Konsolen*) ge
 
 ---
 
-### Operation **Roll-Up**
+### Operation **Drill-Down** (SQL-Abfrage)
 
-Die Operation *Roll-Up* entspricht dem Gegenteil der Operation *Drill-Down* und beinhaltet eine Aggregation der Fakten durch heraustauchen aus der Slice-Dimension.
+Wie gehabt, hier wieder das Muster für eine SQL-Abfrage, welche die Operation *Drill-Down* auf einem Stern-Schema ausführt:
 
-![](https://upload.wikimedia.org/wikipedia/commons/2/22/OLAP_Drill-Down.png)
+```sql
+select Dimension_1.Attribut_1_1, Dimension_2.Attribut_2_2, Dimension_2.Attribut_3_1, sum(Fakt.Kennwert_1)
+    from Fakt
+        inner join Dimension_1 on Fakt.fk_1 = Dimension_1.pk_1
+        inner join Dimension_2 on Fakt.fk_2 = Dimension_2.pk_2
+        inner join Dimension_3 on Fakt.fk_3 = Dimension_3.pk_3
+    where Dimension_2.Attribut_2_1 = <Wert>
+    group by Dimension_1.Attribut_1_1, Dimension_2.Attribut_2_2, Dimension_2.Attribut_3_1
+    order by Dimension_1.Attribut_1_1, Dimension_2.Attribut_2_2, Dimension_2.Attribut_3_1
+```
+
+*Beachte die hinzugefügte **Selektion auf Dimension 2/Ebene 1** sowie die veränderte **Projektion, Gruppierung, und Sortierung auf Dimension 2/Ebene 2**.*
 
 ---
 
@@ -819,4 +984,5 @@ Die Operation *Roll-Up* entspricht dem Gegenteil der Operation *Drill-Down* und 
 So kannst du dein Verständnis noch weiter vertiefen:
 
 - Zeichnen Sie einen OLAP-Würfel für das Datenlager-Schema eines produzierenden Betriebs
-- Wenden Sie die Operation Drill-Down für einen ausgewählten Wert einer beliebigen Dimension an und zeichnen Sie den Würfel erneut
+- Wenden Sie die Operation Drill-Down für einen ausgewählten Wert einer beliebigen Dimension manuell an
+- Setzen Sie schließlich dieselbe Operation noch in SQL um.
