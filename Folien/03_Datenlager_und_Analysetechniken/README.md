@@ -756,7 +756,6 @@ Und nun zu den Inhalten des Würfels:
 - Die Gruppe ergibt sich aus den **Attributwerten** der gewählten **Dimensionsebenen**, z.B.:
   - $(2023, Maschinen, AT)$
   - $(2024, Anlagen, DE)$
-  - $(2025, Service, CH)$
 
 </div>
 <div>
