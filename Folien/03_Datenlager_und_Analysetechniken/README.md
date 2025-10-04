@@ -976,6 +976,27 @@ select Dimension_1.Attribut_1_1, Dimension_2.Attribut_2_2, Dimension_2.Attribut_
 
 ---
 
+<div class="columns">
+<div>
+
+### OLAP Software
+
+Und so sieht OLAP Software beispiels-weise in der Anwendung aus:
+
+- **Zweidimensionaler Würfel** aufgrund von Einschränkungen der Benutzer-schnittstelle (d.h. Bildschirm)
+- Festlegung der Dimensions des Wurfels durch **Drag-&-Drop** aus einem Katalog
+- Drill-Down durch **Aufklappen** der gewünschten Unterebene
+
+</div>
+<div>
+
+![](https://www.kyubit.com/Images/OLAP/OLAP-Tools-1.webp)
+
+</div>
+</div>
+
+---
+
 ![bg right](../Selbststudium.png)
 
 ### Aufgaben für das **Selbststudium**
